@@ -28,6 +28,7 @@ function mapDbToProject(row: DbProjectRow): Project {
     demoUrl: row.demo_url,
     status: row.status,
     isFeatured: row.is_featured,
+    sortOrder: row.sort_order,
   };
 }
 
@@ -102,4 +103,18 @@ export async function updateProject(id: string, input: ProjectInput) {
 export async function deleteProject(id: string) {
   const { error } = await supabase.from("projects").delete().eq("id", id);
   if (error) throw new Error(error.message);
+}
+
+
+export async function fetchProjectById(id: string): Promise<Project> {
+  const { data, error } = await supabase
+    .from("projects")
+    .select(SELECT_FIELDS)
+    .eq("id", id)
+    .maybeSingle();
+
+  if (error) throw new Error(error.message);
+  if (!data) throw new Error("NOT_FOUND");
+
+  return mapDbToProject(data as DbProjectRow);
 }

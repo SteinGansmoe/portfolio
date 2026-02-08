@@ -8,6 +8,9 @@ import { ProjectDetailPage } from "./pages/ProjectDetailPage";
 import { LoginPage } from "./pages/LoginPage";
 import { AdminDashboardPage } from "./pages/AdminDashboardPage";
 import { RequireAdmin } from "./features/auth/RequireAdmin";
+import { AdminProjectNewPage } from "./pages/AdminProjectNewPage";
+import { AdminProjectEditPage } from "./pages/AdminProjectEditPage";
+
 
 
 function App() {
@@ -23,8 +26,9 @@ function App() {
 
       <Route element={<RequireAdmin />}>
     <Route path="/admin" element={<AdminDashboardPage />} />
-    <Route path="/admin/projects/new" element={<AdminProjectNewPage />} />
-  <Route path="/admin/projects/:id/edit" element={<AdminProjectEditPage />} />
+    
+   <Route path="/admin/projects/new" element={<AdminProjectNewPage />} /> 
+  <Route path="/admin/projects/:id/edit" element={<AdminProjectEditPage />} /> 
   </Route>
 </Routes>
 
