@@ -22,7 +22,7 @@ function mapDbToProject(row: DbProjectRow): Project {
     title: row.title,
     slug: row.slug,
     excerpt: row.excerpt,
-    content: row.content,
+    content: row.content ?? "",
     tags: row.tags ?? [],
     githubUrl: row.github_url,
     demoUrl: row.demo_url,
@@ -58,4 +58,48 @@ export async function fetchProjectBySlug(slug: string): Promise<Project> {
   if (!data) throw new Error("NOT_FOUND");
 
   return mapDbToProject(data as DbProjectRow);
+}
+
+
+type ProjectInput = {
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  tags: string[];
+  githubUrl: string;
+  demoUrl?: string | null;
+  status: "active" | "completed";
+  isFeatured: boolean;
+  sortOrder: number;
+};
+
+function toDbInput(input: ProjectInput) {
+  return {
+    title: input.title,
+    slug: input.slug,
+    excerpt: input.excerpt,
+    content: input.content,
+    tags: input.tags,
+    github_url: input.githubUrl,
+    demo_url: input.demoUrl ?? null,
+    status: input.status,
+    is_featured: input.isFeatured,
+    sort_order: input.sortOrder,
+  };
+}
+
+export async function createProject(input: ProjectInput) {
+  const { error } = await supabase.from("projects").insert(toDbInput(input));
+  if (error) throw new Error(error.message);
+}
+
+export async function updateProject(id: string, input: ProjectInput) {
+  const { error } = await supabase.from("projects").update(toDbInput(input)).eq("id", id);
+  if (error) throw new Error(error.message);
+}
+
+export async function deleteProject(id: string) {
+  const { error } = await supabase.from("projects").delete().eq("id", id);
+  if (error) throw new Error(error.message);
 }
