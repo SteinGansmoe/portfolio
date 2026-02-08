@@ -22,6 +22,7 @@ function mapDbToProject(row: DbProjectRow): Project {
     title: row.title,
     slug: row.slug,
     excerpt: row.excerpt,
+    content: row.content,
     tags: row.tags ?? [],
     githubUrl: row.github_url,
     demoUrl: row.demo_url,
@@ -30,15 +31,31 @@ function mapDbToProject(row: DbProjectRow): Project {
   };
 }
 
+const SELECT_FIELDS =
+  "id,title,slug,excerpt,content,tags,github_url,demo_url,is_featured,sort_order,status,created_at";
+
 export async function fetchProjects(): Promise<Project[]> {
   const { data, error } = await supabase
     .from("projects")
-    .select("id,title,slug,excerpt,tags,github_url,demo_url,is_featured,sort_order,status,created_at")
+    .select(SELECT_FIELDS)
     .order("sort_order", { ascending: true })
     .order("created_at", { ascending: false });
 
-  if (error) throw error;
+  if (error) throw new Error(error.message);
 
   const rows = (data ?? []) as DbProjectRow[];
   return rows.map(mapDbToProject);
+}
+
+export async function fetchProjectBySlug(slug: string): Promise<Project> {
+  const { data, error } = await supabase
+    .from("projects")
+    .select(SELECT_FIELDS)
+    .eq("slug", slug)
+    .maybeSingle();
+
+  if (error) throw new Error(error.message);
+  if (!data) throw new Error("NOT_FOUND");
+
+  return mapDbToProject(data as DbProjectRow);
 }

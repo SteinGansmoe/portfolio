@@ -3,6 +3,7 @@ export type Project = {
   title: string;
   slug: string;
   excerpt: string;
+  content: string; // ✅ legg til
   tags: string[];
   githubUrl: string;
   demoUrl?: string | null;
