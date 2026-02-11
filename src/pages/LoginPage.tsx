@@ -34,7 +34,7 @@ export function LoginPage() {
     <section className="mx-auto max-w-md space-y-6">
       <div className="space-y-2">
         <h1 className="text-3xl font-semibold tracking-tight">Login</h1>
-        <p className="text-slate-300 text-sm">Kun for admin.</p>
+        <p className="text-slate-300 text-sm">Only for site owner.</p>
       </div>
 
       <form
@@ -42,7 +42,7 @@ export function LoginPage() {
         className="space-y-4 rounded-2xl border border-slate-800/70 bg-slate-900/30 p-5"
       >
         <div className="space-y-2">
-          <label className="text-sm text-slate-200">E-post</label>
+          <label className="text-sm text-slate-200">Email</label>
           <input
             className="w-full rounded-lg border border-slate-700 bg-slate-950/40 px-3 py-2 text-sm text-slate-100 outline-none focus:border-slate-500"
             type="email"
@@ -54,7 +54,7 @@ export function LoginPage() {
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm text-slate-200">Passord</label>
+          <label className="text-sm text-slate-200">Password</label>
           <input
             className="w-full rounded-lg border border-slate-700 bg-slate-950/40 px-3 py-2 text-sm text-slate-100 outline-none focus:border-slate-500"
             type="password"
@@ -76,7 +76,7 @@ export function LoginPage() {
           className="w-full rounded-lg bg-white px-4 py-2 text-sm font-medium text-slate-900 hover:bg-slate-200 disabled:opacity-60"
           type="submit"
         >
-          {status === "loading" ? "Logger inn…" : "Logg inn"}
+          {status === "loading" ? "Logging in…" : "Login"}
         </button>
       </form>
     </section>
