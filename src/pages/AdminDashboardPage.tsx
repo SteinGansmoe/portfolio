@@ -35,7 +35,7 @@ export function AdminDashboardPage() {
   }
 
   async function handleDelete(id: string, title: string) {
-    const ok = window.confirm(`Slette "${title}"? Dette kan ikke angres.`);
+    const ok = window.confirm(`Delete "${title}"? This cannot be undone.`);
     if (!ok) return;
 
     try {
@@ -53,7 +53,7 @@ export function AdminDashboardPage() {
       <div className="flex items-start justify-between gap-4">
         <div className="space-y-2">
           <h1 className="text-3xl font-semibold tracking-tight">Admin</h1>
-          <p className="text-slate-300">Legg til, endre og slett prosjekter.</p>
+          <p className="text-slate-300">Add, Edit or Delete Projects.</p>
         </div>
 
         <div className="flex items-center gap-3">
@@ -61,21 +61,21 @@ export function AdminDashboardPage() {
             to="/admin/projects/new"
             className="rounded-lg bg-white px-3 py-2 text-sm font-medium text-slate-900 hover:bg-slate-200"
           >
-            + Ny prosjekt
+            + New Project
           </Link>
 
           <button
             onClick={handleLogout}
             className="rounded-lg border border-slate-700 px-3 py-2 text-sm text-slate-100 hover:border-slate-500"
           >
-            Logg ut
+            Log out
           </button>
         </div>
       </div>
 
       {status === "loading" && (
         <div className="rounded-2xl border border-slate-800/70 bg-slate-900/30 p-5 text-slate-300">
-          Laster prosjekter…
+          Loading projects…
         </div>
       )}
 
@@ -88,7 +88,7 @@ export function AdminDashboardPage() {
       {status === "success" && (
         <div className="overflow-hidden rounded-2xl border border-slate-800/70 bg-slate-900/30">
           <div className="grid grid-cols-12 gap-3 border-b border-slate-800/70 px-4 py-3 text-xs text-slate-400">
-            <div className="col-span-5">Tittel</div>
+            <div className="col-span-5">Title</div>
             <div className="col-span-3">Status</div>
             <div className="col-span-2">Featured</div>
             <div className="col-span-2 text-right">Actions</div>
@@ -128,7 +128,7 @@ export function AdminDashboardPage() {
 
           {projects.length === 0 && (
             <div className="px-4 py-6 text-sm text-slate-300">
-              Ingen prosjekter enda. Trykk <b>Ny prosjekt</b>.
+              No projects yet. Click <b>New Project</b> to add a project.
             </div>
           )}
         </div>
