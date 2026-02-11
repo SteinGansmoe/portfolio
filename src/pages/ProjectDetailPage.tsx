@@ -51,7 +51,7 @@ export function ProjectDetailPage() {
   if (!slug) {
     return (
       <div className="rounded-2xl border border-slate-800/70 bg-slate-900/30 p-4 text-slate-300">
-        Ugyldig URL.
+        Invalid URL.
       </div>
     );
   }
@@ -70,9 +70,9 @@ export function ProjectDetailPage() {
   if (status === "not_found") {
     return (
       <div className="space-y-4">
-        <p className="text-slate-300">Fant ikke prosjektet.</p>
+        <p className="text-slate-300">Could not locate project.</p>
         <Link className="text-sm text-slate-300 hover:text-white" to="/projects">
-          ← Tilbake til prosjekter
+          ← Go back to projects
         </Link>
       </div>
     );
@@ -81,7 +81,7 @@ export function ProjectDetailPage() {
   if (status === "error") {
     return (
       <div className="rounded-2xl border border-red-500/30 bg-red-500/10 p-4 text-sm text-red-200">
-        Klarte ikke å hente prosjekt: <span className="text-red-100">{errorMessage}</span>
+        Could not fetch project: <span className="text-red-100">{errorMessage}</span>
       </div>
     );
   }
@@ -92,7 +92,7 @@ export function ProjectDetailPage() {
     <article className="space-y-6">
       <div className="space-y-2">
         <Link className="text-sm text-slate-300 hover:text-white" to="/projects">
-          ← Tilbake
+          ← Go back
         </Link>
 
         <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
