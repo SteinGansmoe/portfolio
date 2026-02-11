@@ -7,8 +7,7 @@ export function HomePage() {
           I build clean, user-friendly web apps.
         </h1>
         <p className="max-w-2xl text-slate-300">
-          React, TypeScript og moderne UI. Nå bygger jeg også rutevarsel.no som et
-          produkt-prosjekt ved siden av.
+          React, TypeScript og moderne UI. Currently I am working on improving my skill and understanding in React and TypeScript environments. 
         </p>
       </div>
 
@@ -17,7 +16,7 @@ export function HomePage() {
           className="rounded-lg bg-white px-4 py-2 text-sm font-medium text-slate-900 hover:bg-slate-200"
           href="/projects"
         >
-          Se prosjekter
+          View Projects
         </a>
         <a
           className="rounded-lg border border-slate-700 px-4 py-2 text-sm font-medium text-slate-100 hover:border-slate-500"
@@ -25,7 +24,7 @@ export function HomePage() {
           target="_blank"
           rel="noreferrer"
         >
-          GitHub
+          My GitHub profile
         </a>
       </div>
     </section>
