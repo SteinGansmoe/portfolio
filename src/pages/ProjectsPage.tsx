@@ -44,7 +44,7 @@ export function ProjectsPage() {
       <div className="space-y-2">
         <h1 className="text-3xl font-semibold tracking-tight">Projects</h1>
         <p className="text-slate-300">
-          Utvalgte prosjekter og produkter jeg har bygget (og bygger nå).
+          Selected projects Ive built and is currently building.
         </p>
       </div>
 
@@ -61,13 +61,13 @@ export function ProjectsPage() {
 
       {status === "error" && (
         <div className="rounded-2xl border border-red-500/30 bg-red-500/10 p-4 text-sm text-red-200">
-          Klarte ikke å hente prosjekter: <span className="text-red-100">{errorMessage}</span>
+          Could not fetch projects: <span className="text-red-100">{errorMessage}</span>
         </div>
       )}
 
       {status === "success" && projects.length === 0 && (
         <div className="rounded-2xl border border-slate-800/70 bg-slate-900/30 p-4 text-sm text-slate-300">
-          Ingen prosjekter enda. Legg inn et prosjekt i Supabase-tabellen <code className="text-slate-100">projects</code>.
+          No projects yet. Add a new project to Supabase <code className="text-slate-100">projects</code>.
         </div>
       )}
 
