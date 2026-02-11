@@ -96,7 +96,7 @@ export function AdminProjectEditPage() {
   if (!id) {
     return (
       <div className="rounded-2xl border border-slate-800/70 bg-slate-900/30 p-4 text-slate-300">
-        Ugyldig URL.
+        Invalid URL.
       </div>
     );
   }
@@ -104,7 +104,7 @@ export function AdminProjectEditPage() {
   if (status === "loading") {
     return (
       <div className="rounded-2xl border border-slate-800/70 bg-slate-900/30 p-4 text-slate-300">
-        Laster prosjekt…
+        Loading project…
       </div>
     );
   }
@@ -112,9 +112,9 @@ export function AdminProjectEditPage() {
   if (status === "not_found") {
     return (
       <div className="space-y-4">
-        <p className="text-slate-300">Fant ikke prosjektet.</p>
+        <p className="text-slate-300">Could not locate project.</p>
         <Link className="text-sm text-slate-300 hover:text-white" to="/admin">
-          ← Tilbake
+          ← Go Back
         </Link>
       </div>
     );
@@ -123,7 +123,7 @@ export function AdminProjectEditPage() {
   if (status === "error") {
     return (
       <div className="rounded-2xl border border-red-500/30 bg-red-500/10 p-4 text-sm text-red-200">
-        Klarte ikke å hente prosjekt: <span className="text-red-100">{errorMessage}</span>
+        Could not fetch project: <span className="text-red-100">{errorMessage}</span>
       </div>
     );
   }
@@ -132,10 +132,10 @@ export function AdminProjectEditPage() {
     <section className="space-y-6">
       <div className="space-y-2">
         <Link className="text-sm text-slate-300 hover:text-white" to="/admin">
-          ← Tilbake
+          ← Go back
         </Link>
-        <h1 className="text-3xl font-semibold tracking-tight">Edit prosjekt</h1>
-        <p className="text-slate-300">Oppdater innhold og lagre.</p>
+        <h1 className="text-3xl font-semibold tracking-tight">Edit project</h1>
+        <p className="text-slate-300">Update content and save.</p>
       </div>
 
       <div className="rounded-2xl border border-slate-800/70 bg-slate-900/30 p-5">
