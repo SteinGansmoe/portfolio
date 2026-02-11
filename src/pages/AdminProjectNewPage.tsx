@@ -35,8 +35,8 @@ export function AdminProjectNewPage() {
         <Link className="text-sm text-slate-300 hover:text-white" to="/admin">
           ← Tilbake
         </Link>
-        <h1 className="text-3xl font-semibold tracking-tight">Ny prosjekt</h1>
-        <p className="text-slate-300">Legg inn et nytt prosjekt.</p>
+        <h1 className="text-3xl font-semibold tracking-tight">New project</h1>
+        <p className="text-slate-300">Add a new project.</p>
       </div>
 
       <div className="rounded-2xl border border-slate-800/70 bg-slate-900/30 p-5">
