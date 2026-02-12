@@ -43,7 +43,7 @@ export function HomePage() {
         <div className="flex flex-wrap gap-3">
           <Link
             to="/projects"
-            className="rounded-lg bg-white px-4 py-2 text-sm font-medium text-slate-900 hover:bg-slate-200"
+            className="btn-primary"
           >
             View projects
           </Link>
@@ -51,7 +51,7 @@ export function HomePage() {
             href="https://github.com/"
             target="_blank"
             rel="noreferrer"
-            className="rounded-lg border border-slate-700 px-4 py-2 text-sm font-medium text-slate-100 hover:border-slate-500"
+            className="btn-secondary"
           >
             GitHub
           </a>
