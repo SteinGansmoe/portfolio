@@ -105,6 +105,22 @@ export async function deleteProject(id: string) {
   if (error) throw new Error(error.message);
 }
 
+export async function fetchFeaturedProjects(limit = 3) {
+  const { data, error } = await supabase
+    .from("projects")
+    .select("id,title,slug,excerpt,content,tags,github_url,demo_url,is_featured,sort_order,status,created_at")
+    .eq("is_featured", true)
+    .order("sort_order", { ascending: true })
+    .order("created_at", { ascending: false })
+    .limit(limit);
+
+  if (error) throw new Error(error.message);
+
+  const rows = (data ?? []) as any[];
+  return rows.map((r) => mapDbToProject(r));
+}
+
+
 
 export async function fetchProjectById(id: string): Promise<Project> {
   const { data, error } = await supabase
