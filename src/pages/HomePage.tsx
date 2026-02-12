@@ -3,7 +3,7 @@ export function HomePage() {
     <section className="space-y-6">
       <div className="space-y-3">
         <p className="text-sm text-slate-400">Front-End Developer</p>
-        <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
+        <h1 className="font-heading text-5xl font-bold tracking-tight text-white">
           I build clean, user-friendly web apps.
         </h1>
         <p className="max-w-2xl text-slate-300">
