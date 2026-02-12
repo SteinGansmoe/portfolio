@@ -5,7 +5,7 @@ import { useAuth } from "../../features/auth/useAuth";
 function navLinkClass({ isActive }: { isActive: boolean }) {
     return [
         "text-sm font-medium transition-colors",
-        isActive ? "text-white" : "text-slate-300 hover:text-white",
+        isActive ? "text-violet-400" : "text-slate-300 hover:text-white",
     ].join(" ");
 }
 
