@@ -1,26 +1,34 @@
 import { Link } from "react-router-dom";
-import type { Project } from "./types";
+import type { Project } from "@/features/projects/types";
 
 type Props = {
   project: Project;
 };
 
-function StatusBadge({ status }: { status?: Project["status"] }) {
+function StatusBadge({ status }: { status?: "active" | "completed" }) {
   if (!status) return null;
 
-  const styles =
-    status === "active"
-      ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-200"
-      : "border-slate-700 bg-slate-900/60 text-slate-200";
+  const isActive = status === "active";
 
-  const label = status === "active" ? "Active" : "Completed";
+  const base =
+    "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium tracking-tight";
+
+  const styles = isActive
+    ? "border-violet-500/30 bg-violet-500/10 text-violet-200"
+    : "border-slate-700/60 bg-slate-950/30 text-slate-300";
 
   return (
-    <span className={`inline-flex items-center rounded-full border px-2 py-0.5 text-xs ${styles}`}>
-      {label}
+    <span className={`${base} ${styles}`}>
+      <span
+        className={`h-1.5 w-1.5 rounded-full ${
+          isActive ? "bg-violet-400" : "bg-slate-500"
+        }`}
+      />
+      {isActive ? "Active" : "Completed"}
     </span>
   );
 }
+
 
 export function ProjectCard({ project }: Props) {
   return (

@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { slugify } from "./slug";
+import { slugify } from "@/features/projects/slug";
 
 export type ProjectFormValues = {
   title: string;
