@@ -26,7 +26,6 @@ function App() {
 
       <Route element={<RequireAdmin />}>
     <Route path="/admin" element={<AdminDashboardPage />} />
-    
    <Route path="/admin/projects/new" element={<AdminProjectNewPage />} /> 
   <Route path="/admin/projects/:id/edit" element={<AdminProjectEditPage />} /> 
   </Route>

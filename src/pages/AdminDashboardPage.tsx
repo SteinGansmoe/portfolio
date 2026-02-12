@@ -59,14 +59,14 @@ export function AdminDashboardPage() {
         <div className="flex items-center gap-3">
           <Link
             to="/admin/projects/new"
-            className="rounded-lg bg-white px-3 py-2 text-sm font-medium text-slate-900 hover:bg-slate-200"
+            className="btn-primary"
           >
             + New Project
           </Link>
 
           <button
             onClick={handleLogout}
-            className="rounded-lg border border-slate-700 px-3 py-2 text-sm text-slate-100 hover:border-slate-500"
+            className="btn-secondary"
           >
             Log out
           </button>
@@ -112,7 +112,7 @@ export function AdminDashboardPage() {
               <div className="col-span-2 flex justify-end gap-3 text-sm">
                 <Link
                   to={`/admin/projects/${p.id}/edit`}
-                  className="text-slate-300 hover:text-white"
+                  className="text-slate-300 hover:text-violet-400"
                 >
                   Edit
                 </Link>

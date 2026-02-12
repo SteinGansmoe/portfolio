@@ -7,6 +7,7 @@ export type Project = {
   tags: string[];
   githubUrl: string;
   demoUrl?: string | null;
+  imageUrl?: string | null;
   status?: "active" | "completed";
   isFeatured?: boolean;
   sortOrder?: number; // ✅

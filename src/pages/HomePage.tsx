@@ -33,7 +33,7 @@ export function HomePage() {
       {/* Hero */}
       <div className="space-y-4">
         <p className="text-sm text-slate-400">Front-End Developer</p>
-        <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
+        <h1 className="font-heading text-4xl font-semibold tracking-tight sm:text-5xl">
           Building modern web products with React + TypeScript.
         </h1>
         <p className="max-w-2xl text-slate-300">
@@ -62,7 +62,7 @@ export function HomePage() {
       <div className="space-y-4">
         <div className="flex items-end justify-between gap-4">
           <h2 className="text-xl font-semibold tracking-tight">Featured projects</h2>
-          <Link className="text-sm text-slate-300 hover:text-white" to="/projects">
+          <Link className="text-sm text-slate-300 hover:text-violet-400" to="/projects">
             View all →
           </Link>
         </div>

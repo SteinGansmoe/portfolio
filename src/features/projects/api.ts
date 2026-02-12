@@ -10,6 +10,7 @@ type DbProjectRow = {
   tags: string[];
   github_url: string;
   demo_url: string | null;
+  image_url: string | null;
   is_featured: boolean;
   sort_order: number;
   status: "active" | "completed";
@@ -26,6 +27,7 @@ function mapDbToProject(row: DbProjectRow): Project {
     tags: row.tags ?? [],
     githubUrl: row.github_url,
     demoUrl: row.demo_url,
+    imageUrl: row.image_url ?? null,
     status: row.status,
     isFeatured: row.is_featured,
     sortOrder: row.sort_order,
@@ -33,7 +35,7 @@ function mapDbToProject(row: DbProjectRow): Project {
 }
 
 const SELECT_FIELDS =
-  "id,title,slug,excerpt,content,tags,github_url,demo_url,is_featured,sort_order,status,created_at";
+  "id,title,slug,excerpt,content,tags,github_url,demo_url,image_url,is_featured,sort_order,status,created_at";
 
 export async function fetchProjects(): Promise<Project[]> {
   const { data, error } = await supabase
@@ -70,6 +72,7 @@ type ProjectInput = {
   tags: string[];
   githubUrl: string;
   demoUrl?: string | null;
+  imageUrl?: string | null;
   status: "active" | "completed";
   isFeatured: boolean;
   sortOrder: number;
@@ -84,6 +87,7 @@ function toDbInput(input: ProjectInput) {
     tags: input.tags,
     github_url: input.githubUrl,
     demo_url: input.demoUrl ?? null,
+    image_url: input.imageUrl ?? null,
     status: input.status,
     is_featured: input.isFeatured,
     sort_order: input.sortOrder,
@@ -108,7 +112,7 @@ export async function deleteProject(id: string) {
 export async function fetchFeaturedProjects(limit = 3) {
   const { data, error } = await supabase
     .from("projects")
-    .select("id,title,slug,excerpt,content,tags,github_url,demo_url,is_featured,sort_order,status,created_at")
+    .select("id,title,slug,excerpt,content,tags,github_url,demo_url,image_url,is_featured,sort_order,status,created_at")
     .eq("is_featured", true)
     .order("sort_order", { ascending: true })
     .order("created_at", { ascending: false })

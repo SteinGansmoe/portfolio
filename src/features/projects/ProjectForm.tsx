@@ -9,6 +9,7 @@ export type ProjectFormValues = {
   tagsText: string; // "React, TypeScript, Tailwind"
   githubUrl: string;
   demoUrl: string;
+  imageFile?: File | null;
   status: "active" | "completed";
   isFeatured: boolean;
   sortOrder: number;
@@ -35,6 +36,7 @@ export function ProjectForm({ initialValues, submitLabel, onSubmit }: Props) {
       tagsText: initialValues?.tagsText ?? "",
       githubUrl: initialValues?.githubUrl ?? "",
       demoUrl: initialValues?.demoUrl ?? "",
+      imageFile: null,
       status: initialValues?.status ?? "completed",
       isFeatured: initialValues?.isFeatured ?? false,
       sortOrder: initialValues?.sortOrder ?? 0,
@@ -95,6 +97,21 @@ export function ProjectForm({ initialValues, submitLabel, onSubmit }: Props) {
             required
           />
         </div>
+
+        <div className="space-y-2">
+          <label className="text-sm text-slate-200">Project image (optional)</label>
+            <input
+              type="file"
+              accept="image/*"
+              className="block w-full text-sm text-slate-300 file:mr-4 file:rounded-lg file:border-0 file:bg-slate-800 file:px-3 file:py-2 file:text-sm file:font-medium file:text-slate-100 hover:file:bg-slate-700"
+              onChange={(e) => {
+              const file = e.target.files?.[0] ?? null;
+              update("imageFile", file);
+            }}
+          />
+        <p className="text-xs text-slate-500">Recommended: 1600×900 (jpg/png/webp).</p>
+        </div>
+
 
         <div className="space-y-2">
           <label className="text-sm text-slate-200">Slug</label>
