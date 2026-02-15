@@ -48,7 +48,7 @@ export function HomePage() {
             View projects
           </Link>
           <a
-            href="https://github.com/"
+            href="https://github.com/SteinGansmoe"
             target="_blank"
             rel="noreferrer"
             className="btn-secondary"
