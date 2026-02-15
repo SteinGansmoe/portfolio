@@ -44,7 +44,7 @@ export function ProjectsPage() {
       <div className="space-y-2">
         <h1 className="text-3xl font-semibold tracking-tight">Projects</h1>
         <p className="text-slate-300">
-          Selected projects Ive built and is currently building.
+          Selected projects I have made and is currently building.
         </p>
       </div>
 

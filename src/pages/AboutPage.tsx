@@ -6,7 +6,8 @@ export function AboutPage() {
  <div className="relative mx-auto w-full max-w-sm">
   <div className="absolute -inset-2 rounded-xl bg-violet-500/20 blur-2xl" />
 
-  <div className="relative overflow-hidden rounded-xl border border-slate-800/60 bg-slate-900/30">
+  <div className="relative overflow-hidden rounded-xl border border-slate-800/60 bg-slate-900/30 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.7)]"
+>
     <img
       src="/crestauction.jpg"
       alt="Stein Gansmoe"

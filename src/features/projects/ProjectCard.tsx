@@ -54,7 +54,7 @@ export function ProjectCard({ project }: Props) {
       aria-label={`Open project: ${project.title}`}
       onClick={goToProject}
       onKeyDown={handleKeyDown}
-      className="group cursor-pointer rounded-xl border border-slate-800/60 bg-slate-900/30 p-5 transition-all duration-300 hover:border-violet-400 hover:bg-slate-900/40 hover:-translate-y-0.5 hover:shadow-[0_10px_30px_5px_rgba(139,92,246,0.25)] focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400/50"
+      className="group cursor-pointer rounded-xl border border-slate-800/60 bg-slate-900/30 p-5 transition-all duration-300 hover:border-violet-400 hover:bg-slate-900/40 hover:-translate-y-0.5 hover:shadow-[0_5px_30px_5px_rgba(139,92,246,0.25)] focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400/50"
     >
       {/* Image */}
       <div className="mb-4 overflow-hidden rounded-lg border border-slate-800/60">

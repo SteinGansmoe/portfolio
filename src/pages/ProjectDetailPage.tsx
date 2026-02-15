@@ -117,7 +117,7 @@ export function ProjectDetailPage() {
             href={project.githubUrl}
             target="_blank"
             rel="noreferrer"
-            className="rounded-lg border border-slate-700 px-3 py-2 text-slate-100 hover:border-slate-500"
+            className="btn-secondary"
           >
             GitHub →
           </a>
@@ -127,7 +127,7 @@ export function ProjectDetailPage() {
               href={project.demoUrl}
               target="_blank"
               rel="noreferrer"
-              className="rounded-lg bg-white px-3 py-2 text-slate-900 hover:bg-slate-200"
+              className="btn-primary"
             >
               Live demo →
             </a>
