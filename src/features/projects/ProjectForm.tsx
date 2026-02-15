@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { slugify } from "@/features/projects/slug";
 
 export type ProjectFormValues = {
@@ -10,6 +10,7 @@ export type ProjectFormValues = {
   githubUrl: string;
   demoUrl: string;
   imageFile?: File | null;
+  removeImage?: boolean;
   status: "active" | "completed";
   isFeatured: boolean;
   sortOrder: number;
@@ -17,6 +18,7 @@ export type ProjectFormValues = {
 
 type Props = {
   initialValues?: Partial<ProjectFormValues>;
+  initialImageUrl?: string | null;
   submitLabel: string;
   onSubmit: (values: ProjectFormValues) => Promise<void> | void;
 };
@@ -26,7 +28,7 @@ function toInt(value: string, fallback = 0) {
   return Number.isFinite(n) ? n : fallback;
 }
 
-export function ProjectForm({ initialValues, submitLabel, onSubmit }: Props) {
+export function ProjectForm({ initialValues, initialImageUrl, submitLabel, onSubmit }: Props) {
   const defaults: ProjectFormValues = useMemo(
     () => ({
       title: initialValues?.title ?? "",
@@ -37,6 +39,7 @@ export function ProjectForm({ initialValues, submitLabel, onSubmit }: Props) {
       githubUrl: initialValues?.githubUrl ?? "",
       demoUrl: initialValues?.demoUrl ?? "",
       imageFile: null,
+      removeImage: false,
       status: initialValues?.status ?? "completed",
       isFeatured: initialValues?.isFeatured ?? false,
       sortOrder: initialValues?.sortOrder ?? 0,
@@ -49,6 +52,8 @@ export function ProjectForm({ initialValues, submitLabel, onSubmit }: Props) {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [slugTouched, setSlugTouched] = useState<boolean>(!!defaults.slug);
 
+  const previewUrl = values.imageFile ? URL.createObjectURL(values.imageFile) : null;
+
   function update<K extends keyof ProjectFormValues>(key: K, value: ProjectFormValues[K]) {
     setValues((prev) => ({ ...prev, [key]: value }));
   }
@@ -56,11 +61,17 @@ export function ProjectForm({ initialValues, submitLabel, onSubmit }: Props) {
   function handleTitleChange(nextTitle: string) {
     update("title", nextTitle);
 
-    // Auto-slug hvis bruker ikke har redigert slug manuelt
+    // Auto fill slug when nothing else is specified.
     if (!slugTouched) {
       update("slug", slugify(nextTitle));
     }
   }
+
+  useEffect(() => {
+    return () => {
+      if (previewUrl) URL.revokeObjectURL(previewUrl);
+    };
+  }, [previewUrl]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -93,24 +104,64 @@ export function ProjectForm({ initialValues, submitLabel, onSubmit }: Props) {
             className="w-full rounded-lg border border-slate-700 bg-slate-950/40 px-3 py-2 text-sm text-slate-100 outline-none focus:border-slate-500"
             value={values.title}
             onChange={(e) => handleTitleChange(e.target.value)}
-            placeholder="Holidaze Retreats"
+            placeholder="Project name..."
             required
           />
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm text-slate-200">Project image (optional)</label>
-            <input
-              type="file"
-              accept="image/*"
-              className="block w-full text-sm text-slate-300 file:mr-4 file:rounded-lg file:border-0 file:bg-slate-800 file:px-3 file:py-2 file:text-sm file:font-medium file:text-slate-100 hover:file:bg-slate-700"
-              onChange={(e) => {
-              const file = e.target.files?.[0] ?? null;
-              update("imageFile", file);
-            }}
-          />
-        <p className="text-xs text-slate-500">Recommended: 1600×900 (jpg/png/webp).</p>
-        </div>
+  <label className="text-sm text-slate-200">Project image</label>
+
+  {/* Preview area */}
+  <div className="overflow-hidden rounded-lg border border-slate-800/60 bg-slate-950/20">
+    {previewUrl ? (
+      <img src={previewUrl} alt="New image preview" className="h-44 w-full object-cover" />
+    ) : initialImageUrl && !values.removeImage ? (
+      <img src={initialImageUrl} alt="Current project image" className="h-44 w-full object-cover" />
+    ) : (
+      <div className="h-44 w-full bg-slate-900/30" />
+    )}
+  </div>
+
+  {/* Controls */}
+  <div className="flex flex-wrap items-center gap-3">
+    <input
+      type="file"
+      accept="image/*"
+      className="block text-sm text-slate-300 file:mr-3 file:rounded-lg file:border-0 file:bg-slate-800 file:px-3 file:py-2 file:text-sm file:font-medium file:text-slate-100 hover:file:bg-slate-700"
+      onChange={(e) => {
+        const file = e.target.files?.[0] ?? null;
+        update("imageFile", file);
+        // selecting a new file implies we are NOT removing the image
+        update("removeImage", false);
+      }}
+    />
+
+    {/* Remove selected upload */}
+    {values.imageFile && (
+      <button
+        type="button"
+        className="btn-secondary"
+        onClick={() => update("imageFile", null)}
+      >
+        Remove selected
+      </button>
+    )}
+
+    {/* Remove current image (edit mode only) */}
+    {initialImageUrl && !values.imageFile && (
+      <button
+        type="button"
+        className={values.removeImage ? "btn-primary" : "btn-secondary"}
+        onClick={() => update("removeImage", !values.removeImage)}
+      >
+        {values.removeImage ? "Undo remove" : "Remove current"}
+      </button>
+    )}
+  </div>
+
+  <p className="text-xs text-slate-500">Recommended: 1600×900 (jpg/png/webp).</p>
+</div>
 
 
         <div className="space-y-2">

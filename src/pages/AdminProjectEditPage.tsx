@@ -81,6 +81,10 @@ export function AdminProjectEditPage() {
 
     let imageUrl = project.imageUrl ?? null;
 
+    if (values.removeImage) {
+      imageUrl = null;
+    }
+
     if(values.imageFile) {
       imageUrl = await uploadProjectImage(values.imageFile);
     }
@@ -148,7 +152,7 @@ export function AdminProjectEditPage() {
       </div>
 
       <div className="rounded-2xl border border-slate-800/70 bg-slate-900/30 p-5">
-        <ProjectForm initialValues={initialValues} submitLabel="Save changes" onSubmit={handleSubmit} />
+        <ProjectForm initialValues={initialValues} initialImageUrl={project?.imageUrl ?? null} submitLabel="Save changes" onSubmit={handleSubmit} />
       </div>
     </section>
   );

@@ -44,7 +44,7 @@ export function LoginPage() {
         <div className="space-y-2">
           <label className="text-sm text-slate-200">Email</label>
           <input
-            className="w-full rounded-lg border border-slate-700 bg-slate-950/40 px-3 py-2 text-sm text-slate-100 outline-none focus:border-slate-500"
+            className="w-full rounded-lg border border-slate-700 bg-slate-950/40 px-3 py-2 text-sm text-slate-100 outline-none focus:border-violet-500"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -56,7 +56,7 @@ export function LoginPage() {
         <div className="space-y-2">
           <label className="text-sm text-slate-200">Password</label>
           <input
-            className="w-full rounded-lg border border-slate-700 bg-slate-950/40 px-3 py-2 text-sm text-slate-100 outline-none focus:border-slate-500"
+            className="w-full rounded-lg border border-slate-700 bg-slate-950/40 px-3 py-2 text-sm text-slate-100 outline-none focus:border-violet-500"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -73,7 +73,7 @@ export function LoginPage() {
 
         <button
           disabled={status === "loading"}
-          className="w-full rounded-lg bg-white px-4 py-2 text-sm font-medium text-slate-900 hover:bg-slate-200 disabled:opacity-60"
+          className="w-full rounded-lg bg-violet-500 px-4 py-2 text-sm font-medium text-white hover:bg-violet-400 disabled:opacity-60"
           type="submit"
         >
           {status === "loading" ? "Logging in…" : "Login"}

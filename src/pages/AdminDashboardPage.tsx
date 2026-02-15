@@ -40,7 +40,6 @@ export function AdminDashboardPage() {
 
     try {
       await deleteProject(id);
-      // reload (enkelt og robust)
       await load();
     } catch (err) {
       const message = err instanceof Error ? err.message : "Unknown error";
