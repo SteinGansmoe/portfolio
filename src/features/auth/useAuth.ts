@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabaseClient";
 import { getUser, isAdmin } from "./auth";
 
 type AuthState =
@@ -13,7 +14,7 @@ export function useAuth() {
   useEffect(() => {
     let isMounted = true;
 
-    async function run() {
+    async function compute() {
       try {
         const user = await getUser();
 
@@ -33,10 +34,17 @@ export function useAuth() {
       }
     }
 
-    run();
+    // Initial load
+    compute();
+
+    // Listen for login/logout changes
+    const { data: sub } = supabase.auth.onAuthStateChange(() => {
+      compute();
+    });
 
     return () => {
       isMounted = false;
+      sub.subscription.unsubscribe();
     };
   }, []);
 

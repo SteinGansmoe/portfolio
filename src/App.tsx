@@ -10,6 +10,7 @@ import { AdminDashboardPage } from "./pages/AdminDashboardPage";
 import { RequireAdmin } from "./features/auth/RequireAdmin";
 import { AdminProjectNewPage } from "./pages/AdminProjectNewPage";
 import { AdminProjectEditPage } from "./pages/AdminProjectEditPage";
+import { RequireGuest } from "@/features/auth/RequireGuest";
 
 
 
@@ -21,7 +22,14 @@ function App() {
       <Route path="/projects" element={<ProjectsPage />} />
       <Route path="/projects/:slug" element={<ProjectDetailPage />} />
       <Route path="/about" element={<AboutPage />} />
-      <Route path="/login" element={<LoginPage />} />
+      <Route
+  path="/login"
+  element={
+    <RequireGuest>
+      <LoginPage />
+    </RequireGuest>
+  }
+/>
 
 
       <Route element={<RequireAdmin />}>

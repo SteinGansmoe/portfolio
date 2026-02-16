@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import type { Project } from "../features/projects/types";
 import { fetchProjectBySlug } from "../features/projects/api";
+import ReactMarkdown from "react-markdown";
 
 type Status = "idle" | "loading" | "success" | "error" | "not_found";
 
@@ -141,9 +142,11 @@ export function ProjectDetailPage() {
 
       <section className="rounded-2xl border border-slate-800/70 bg-slate-900/30 p-5">
         <h2 className="text-sm font-semibold text-white">Case study</h2>
-        <p className="mt-3 whitespace-pre-wrap text-sm leading-6 text-slate-200">
-          {project.content}
-        </p>
+        <div className="prose prose-invert prose-headings:text-white prose-p:text-slate-300 max-w-none">
+          <ReactMarkdown>
+            {project.content}
+          </ReactMarkdown>
+        </div>
       </section>
     </article>
   );
