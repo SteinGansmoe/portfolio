@@ -92,7 +92,7 @@ export function ProjectDetailPage() {
   return (
     <article className="space-y-6">
       <div className="space-y-2">
-        <Link className="text-sm text-slate-300 hover:text-white" to="/projects">
+        <Link className="text-sm text-slate-300 hover:text-violet-400" to="/projects">
           ← Go back
         </Link>
 
@@ -140,8 +140,8 @@ export function ProjectDetailPage() {
         </div>
       </div>
 
-      <section className="rounded-2xl border border-slate-800/70 bg-slate-900/30 p-5">
-        <h2 className="text-sm font-semibold text-white">Case study</h2>
+      <section className="rounded border border-slate-800/70 bg-slate-900/30 p-5">
+        <h2 className="text-3xl mb-5 font-semibold text-white">Case study</h2>
         <div className="prose prose-invert prose-headings:text-white prose-p:text-slate-300 max-w-none">
           <ReactMarkdown>
             {project.content}

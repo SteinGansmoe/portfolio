@@ -54,21 +54,22 @@ export function ProjectCard({ project }: Props) {
       aria-label={`Open project: ${project.title}`}
       onClick={goToProject}
       onKeyDown={handleKeyDown}
-      className="group cursor-pointer rounded-xl border border-slate-800/60 bg-slate-900/30 p-5 transition-all duration-300 hover:border-violet-400 hover:bg-slate-900/40 hover:-translate-y-0.5 hover:shadow-[0_5px_30px_5px_rgba(139,92,246,0.25)] focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400/50"
+      className="group cursor-pointer rounded border border-slate-800/50 bg-slate-900/20 p-5 transition-all duration-300 hover:border-violet-400 hover:bg-slate-900/40 hover:-translate-y-1 hover:shadow-[0_8px_40px_-10px_rgba(139,92,246,0.25)] focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400/50"
     >
       {/* Image */}
-      <div className="mb-4 overflow-hidden rounded-lg border border-slate-800/60">
-        {project.imageUrl ? (
-          <img
-            src={project.imageUrl}
-            alt={`${project.title} preview`}
-            className="h-40 w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-            loading="lazy"
-          />
-        ) : (
-          <div className="h-40 w-full bg-slate-900/40" />
-        )}
-      </div>
+      <div className="mb-4 aspect-[16/9] overflow-hidden rounded border border-slate-800/50 bg-slate-900/40">
+  {project.imageUrl ? (
+    <img
+      style={{ imageRendering: "auto"}} // Remove this line 
+      src={project.imageUrl}
+      alt={`${project.title} preview`}
+      className="h-full w-full object-cover"
+      loading="lazy"
+    />
+  ) : (
+    <div className="h-full w-full bg-slate-900/40" />
+  )}
+</div>
 
       {/* Title + Status */}
       <div className="flex items-start justify-between gap-3">
@@ -87,7 +88,7 @@ export function ProjectCard({ project }: Props) {
         {project.tags.map((tag) => (
           <span
             key={tag}
-            className="rounded-full border border-slate-800 bg-slate-950/40 px-2.5 py-1 text-xs text-slate-300"
+            className="rounded border border-slate-800 bg-slate-950/40 px-2.5 py-1 text-xs text-slate-300"
           >
             {tag}
           </span>
