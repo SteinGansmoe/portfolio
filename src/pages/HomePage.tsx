@@ -37,14 +37,12 @@ export function HomePage() {
           Building modern web products with React + TypeScript.
         </h1>
         <p className="max-w-2xl text-slate-300">
-          I focus on clean UX, maintainable code, and shipping features that users actually need.
+          I focus on clean UX, maintainable code, and shipping features that users
+          actually need.
         </p>
 
         <div className="flex flex-wrap gap-3">
-          <Link
-            to="/projects"
-            className="btn-primary"
-          >
+          <Link to="/projects" className="btn-primary">
             View projects
           </Link>
           <a

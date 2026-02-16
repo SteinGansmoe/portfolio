@@ -141,11 +141,9 @@ export function ProjectDetailPage() {
       </div>
 
       <section className="rounded border border-slate-800/70 bg-slate-900/30 p-5">
-        <h2 className="text-3xl mb-5 font-semibold text-white">Case study</h2>
-        <div className="prose prose-invert prose-headings:text-white prose-p:text-slate-300 max-w-none">
-          <ReactMarkdown>
-            {project.content}
-          </ReactMarkdown>
+        <h2 className="mb-5 text-3xl font-semibold text-white">Case study</h2>
+        <div className="prose prose-invert max-w-none prose-headings:text-white prose-p:text-slate-300">
+          <ReactMarkdown>{project.content}</ReactMarkdown>
         </div>
       </section>
     </article>

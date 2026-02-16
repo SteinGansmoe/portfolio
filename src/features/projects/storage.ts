@@ -20,5 +20,5 @@ export async function uploadProjectImage(file: File) {
   if (uploadError) throw new Error(uploadError.message);
 
   const { data } = supabase.storage.from("project-images").getPublicUrl(path);
-  return data.publicUrl; 
+  return data.publicUrl;
 }

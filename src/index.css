@@ -2,26 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-
 body {
   @apply font-sans;
-
 }
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-lg
-           bg-violet-600 px-4 py-2 text-sm font-medium text-white hover:text-slate-900
-           transition-colors duration-200
-           hover:bg-violet-500
-           focus:outline-none focus:ring-2 focus:ring-violet-500/50;
+    @apply inline-flex items-center justify-center rounded-lg bg-violet-600 px-4 py-2 text-sm font-medium text-white transition-colors duration-200 hover:bg-violet-500 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-violet-500/50;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center rounded-lg
-           border border-slate-700 px-4 py-2 text-sm font-medium text-slate-100
-           transition-colors duration-200
-           hover:border-violet-500 hover:text-violet-300
-           focus:outline-none focus:ring-2 focus:ring-violet-500/30;
+    @apply inline-flex items-center justify-center rounded-lg border border-slate-700 px-4 py-2 text-sm font-medium text-slate-100 transition-colors duration-200 hover:border-violet-500 hover:text-violet-300 focus:outline-none focus:ring-2 focus:ring-violet-500/30;
   }
 }

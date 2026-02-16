@@ -5,7 +5,6 @@ import { fetchProjectById, updateProject } from "../features/projects/api";
 import type { Project } from "../features/projects/types";
 import { uploadProjectImage } from "@/features/projects/storage";
 
-
 type Status = "loading" | "ready" | "error" | "not_found";
 
 function tagsToText(tags: string[]) {
@@ -72,7 +71,7 @@ export function AdminProjectEditPage() {
       demoUrl: project.demoUrl ?? "",
       status: project.status ?? "completed",
       isFeatured: !!project.isFeatured,
-      sortOrder: 0, 
+      sortOrder: 0,
     };
   }, [project]);
 
@@ -85,7 +84,7 @@ export function AdminProjectEditPage() {
       imageUrl = null;
     }
 
-    if(values.imageFile) {
+    if (values.imageFile) {
       imageUrl = await uploadProjectImage(values.imageFile);
     }
 
@@ -152,7 +151,12 @@ export function AdminProjectEditPage() {
       </div>
 
       <div className="rounded-2xl border border-slate-800/70 bg-slate-900/30 p-5">
-        <ProjectForm initialValues={initialValues} initialImageUrl={project?.imageUrl ?? null} submitLabel="Save changes" onSubmit={handleSubmit} />
+        <ProjectForm
+          initialValues={initialValues}
+          initialImageUrl={project?.imageUrl ?? null}
+          submitLabel="Save changes"
+          onSubmit={handleSubmit}
+        />
       </div>
     </section>
   );

@@ -54,27 +54,27 @@ export function ProjectCard({ project }: Props) {
       aria-label={`Open project: ${project.title}`}
       onClick={goToProject}
       onKeyDown={handleKeyDown}
-      className="group cursor-pointer rounded border border-slate-800/50 bg-slate-900/20 p-5 transition-all duration-300 hover:border-violet-400 hover:bg-slate-900/40 hover:-translate-y-1 hover:shadow-[0_8px_40px_-10px_rgba(139,92,246,0.25)] focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400/50"
+      className="group cursor-pointer rounded border border-slate-800/50 bg-slate-900/20 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-violet-400 hover:bg-slate-900/40 hover:shadow-[0_8px_40px_-10px_rgba(139,92,246,0.25)] focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400/50"
     >
       {/* Image */}
       <div className="mb-4 aspect-[16/9] overflow-hidden rounded border border-slate-800/50 bg-slate-900/40">
-  {project.imageUrl ? (
-    <img
-      style={{ imageRendering: "auto"}} // Remove this line 
-      src={project.imageUrl}
-      alt={`${project.title} preview`}
-      className="h-full w-full object-cover"
-      loading="lazy"
-    />
-  ) : (
-    <div className="h-full w-full bg-slate-900/40" />
-  )}
-</div>
+        {project.imageUrl ? (
+          <img
+            style={{ imageRendering: "auto" }} // Remove this line
+            src={project.imageUrl}
+            alt={`${project.title} preview`}
+            className="h-full w-full object-cover"
+            loading="lazy"
+          />
+        ) : (
+          <div className="h-full w-full bg-slate-900/40" />
+        )}
+      </div>
 
       {/* Title + Status */}
       <div className="flex items-start justify-between gap-3">
         <div className="space-y-1">
-          <h3 className="text-base font-semibold tracking-tight text-white group-hover:text-violet-300 transition-colors">
+          <h3 className="text-base font-semibold tracking-tight text-white transition-colors group-hover:text-violet-300">
             {project.title}
           </h3>
           <p className="text-sm text-slate-300">{project.excerpt}</p>
@@ -102,7 +102,7 @@ export function ProjectCard({ project }: Props) {
           target="_blank"
           rel="noreferrer"
           onClick={stopCardClick}
-          className="text-slate-300 hover:text-violet-400 transition-colors"
+          className="text-slate-300 transition-colors hover:text-violet-400"
         >
           GitHub →
         </a>
@@ -113,7 +113,7 @@ export function ProjectCard({ project }: Props) {
             target="_blank"
             rel="noreferrer"
             onClick={stopCardClick}
-            className="text-slate-300 hover:text-violet-400 transition-colors"
+            className="text-slate-300 transition-colors hover:text-violet-400"
           >
             Live demo →
           </a>

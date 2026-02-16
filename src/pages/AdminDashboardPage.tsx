@@ -56,17 +56,11 @@ export function AdminDashboardPage() {
         </div>
 
         <div className="flex items-center gap-3">
-          <Link
-            to="/admin/projects/new"
-            className="btn-primary"
-          >
+          <Link to="/admin/projects/new" className="btn-primary">
             + New Project
           </Link>
 
-          <button
-            onClick={handleLogout}
-            className="btn-secondary"
-          >
+          <button onClick={handleLogout} className="btn-secondary">
             Log out
           </button>
         </div>
@@ -100,9 +94,7 @@ export function AdminDashboardPage() {
                 <p className="text-xs text-slate-400">/{p.slug}</p>
               </div>
 
-              <div className="col-span-3 text-sm text-slate-300">
-                {p.status ?? "-"}
-              </div>
+              <div className="col-span-3 text-sm text-slate-300">{p.status ?? "-"}</div>
 
               <div className="col-span-2 text-sm text-slate-300">
                 {p.isFeatured ? "Yes" : "No"}

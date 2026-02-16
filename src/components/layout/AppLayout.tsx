@@ -9,14 +9,14 @@ type Props = {
 
 export function AppLayout({ children }: Props) {
   return (
-<div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col">
-  <Navbar />
+    <div className="flex min-h-screen flex-col bg-slate-950 text-slate-100">
+      <Navbar />
 
-  <main className="flex-1 py-10">
-    <Container>{children}</Container>
-  </main>
+      <main className="flex-1 py-10">
+        <Container>{children}</Container>
+      </main>
 
-  <Footer />
-</div>
+      <Footer />
+    </div>
   );
 }

@@ -28,7 +28,12 @@ function toInt(value: string, fallback = 0) {
   return Number.isFinite(n) ? n : fallback;
 }
 
-export function ProjectForm({ initialValues, initialImageUrl, submitLabel, onSubmit }: Props) {
+export function ProjectForm({
+  initialValues,
+  initialImageUrl,
+  submitLabel,
+  onSubmit,
+}: Props) {
   const defaults: ProjectFormValues = useMemo(
     () => ({
       title: initialValues?.title ?? "",
@@ -44,7 +49,7 @@ export function ProjectForm({ initialValues, initialImageUrl, submitLabel, onSub
       isFeatured: initialValues?.isFeatured ?? false,
       sortOrder: initialValues?.sortOrder ?? 0,
     }),
-    [initialValues]
+    [initialValues],
   );
 
   const [values, setValues] = useState<ProjectFormValues>(defaults);
@@ -54,7 +59,10 @@ export function ProjectForm({ initialValues, initialImageUrl, submitLabel, onSub
 
   const previewUrl = values.imageFile ? URL.createObjectURL(values.imageFile) : null;
 
-  function update<K extends keyof ProjectFormValues>(key: K, value: ProjectFormValues[K]) {
+  function update<K extends keyof ProjectFormValues>(
+    key: K,
+    value: ProjectFormValues[K],
+  ) {
     setValues((prev) => ({ ...prev, [key]: value }));
   }
 
@@ -110,59 +118,66 @@ export function ProjectForm({ initialValues, initialImageUrl, submitLabel, onSub
         </div>
 
         <div className="space-y-2">
-  <label className="text-sm text-slate-200">Project image</label>
+          <label className="text-sm text-slate-200">Project image</label>
 
-  {/* Preview area */}
-  <div className="overflow-hidden rounded-lg border border-slate-800/60 bg-slate-950/20">
-    {previewUrl ? (
-      <img src={previewUrl} alt="New image preview" className="h-44 w-full object-cover" />
-    ) : initialImageUrl && !values.removeImage ? (
-      <img src={initialImageUrl} alt="Current project image" className="h-44 w-full object-cover" />
-    ) : (
-      <div className="h-44 w-full bg-slate-900/30" />
-    )}
-  </div>
+          {/* Preview area */}
+          <div className="overflow-hidden rounded-lg border border-slate-800/60 bg-slate-950/20">
+            {previewUrl ? (
+              <img
+                src={previewUrl}
+                alt="New image preview"
+                className="h-44 w-full object-cover"
+              />
+            ) : initialImageUrl && !values.removeImage ? (
+              <img
+                src={initialImageUrl}
+                alt="Current project image"
+                className="h-44 w-full object-cover"
+              />
+            ) : (
+              <div className="h-44 w-full bg-slate-900/30" />
+            )}
+          </div>
 
-  {/* Controls */}
-  <div className="flex flex-wrap items-center gap-3">
-    <input
-      type="file"
-      accept="image/*"
-      className="block text-sm text-slate-300 file:mr-3 file:rounded-lg file:border-0 file:bg-slate-800 file:px-3 file:py-2 file:text-sm file:font-medium file:text-slate-100 hover:file:bg-slate-700"
-      onChange={(e) => {
-        const file = e.target.files?.[0] ?? null;
-        update("imageFile", file);
-        // selecting a new file implies we are NOT removing the image
-        update("removeImage", false);
-      }}
-    />
+          {/* Controls */}
+          <div className="flex flex-wrap items-center gap-3">
+            <input
+              type="file"
+              accept="image/*"
+              className="block text-sm text-slate-300 file:mr-3 file:rounded-lg file:border-0 file:bg-slate-800 file:px-3 file:py-2 file:text-sm file:font-medium file:text-slate-100 hover:file:bg-slate-700"
+              onChange={(e) => {
+                const file = e.target.files?.[0] ?? null;
+                update("imageFile", file);
+                // selecting a new file implies we are NOT removing the image
+                update("removeImage", false);
+              }}
+            />
 
-    {/* Remove selected upload */}
-    {values.imageFile && (
-      <button
-        type="button"
-        className="btn-secondary"
-        onClick={() => update("imageFile", null)}
-      >
-        Remove selected
-      </button>
-    )}
+            {/* Remove selected upload */}
+            {values.imageFile && (
+              <button
+                type="button"
+                className="btn-secondary"
+                onClick={() => update("imageFile", null)}
+              >
+                Remove selected
+              </button>
+            )}
 
-    {/* Remove current image (edit mode only) */}
-    {initialImageUrl && !values.imageFile && (
-      <button
-        type="button"
-        className={values.removeImage ? "btn-primary" : "btn-secondary"}
-        onClick={() => update("removeImage", !values.removeImage)}
-      >
-        {values.removeImage ? "Undo remove" : "Remove current"}
-      </button>
-    )}
-  </div>
+            {/* Remove current image (edit mode only) */}
+            {initialImageUrl && !values.imageFile && (
+              <button
+                type="button"
+                className={values.removeImage ? "btn-primary" : "btn-secondary"}
+                onClick={() => update("removeImage", !values.removeImage)}
+              >
+                {values.removeImage ? "Undo remove" : "Remove current"}
+              </button>
+            )}
+          </div>
 
-  <p className="text-xs text-slate-500">Recommended: 1600×900 (jpg/png/webp).</p>
-</div>
-
+          <p className="text-xs text-slate-500">Recommended: 1600×900 (jpg/png/webp).</p>
+        </div>
 
         <div className="space-y-2">
           <label className="text-sm text-slate-200">Slug</label>

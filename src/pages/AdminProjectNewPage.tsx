@@ -15,10 +15,9 @@ export function AdminProjectNewPage() {
   const navigate = useNavigate();
 
   async function handleSubmit(values: ProjectFormValues) {
-  
     let imageUrl: string | null = null;
     if (values.imageFile) {
-    imageUrl = await uploadProjectImage(values.imageFile);
+      imageUrl = await uploadProjectImage(values.imageFile);
     }
 
     await createProject({

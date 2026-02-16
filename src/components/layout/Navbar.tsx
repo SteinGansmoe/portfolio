@@ -1,14 +1,13 @@
-import { NavLink } from 'react-router-dom';
-import { Container } from './Container';
+import { NavLink } from "react-router-dom";
+import { Container } from "./Container";
 import { useAuth } from "../../features/auth/useAuth";
 
 function navLinkClass({ isActive }: { isActive: boolean }) {
-    return [
-        "text-sm font-medium transition-colors",
-        isActive ? "text-violet-400" : "text-slate-300 hover:text-white",
-    ].join(" ");
+  return [
+    "text-sm font-medium transition-colors",
+    isActive ? "text-violet-400" : "text-slate-300 hover:text-white",
+  ].join(" ");
 }
-
 
 export function Navbar() {
   const auth = useAuth();
@@ -31,9 +30,7 @@ export function Navbar() {
             About
           </NavLink>
 
-          {auth.status === "loading" && (
-            <span className="text-xs text-slate-500">…</span>
-          )}
+          {auth.status === "loading" && <span className="text-xs text-slate-500">…</span>}
 
           {auth.status === "guest" && (
             <NavLink to="/login" className={navLinkClass}>

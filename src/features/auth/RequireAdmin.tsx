@@ -63,7 +63,8 @@ export function RequireAdmin() {
   if (status === "error") {
     return (
       <div className="rounded-2xl border border-red-500/30 bg-red-500/10 p-4 text-red-200">
-        Klarte ikke å sjekke admin-tilgang: <span className="text-red-100">{errorMessage}</span>
+        Klarte ikke å sjekke admin-tilgang:{" "}
+        <span className="text-red-100">{errorMessage}</span>
       </div>
     );
   }

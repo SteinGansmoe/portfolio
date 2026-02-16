@@ -63,7 +63,6 @@ export async function fetchProjectBySlug(slug: string): Promise<Project> {
   return mapDbToProject(data as DbProjectRow);
 }
 
-
 type ProjectInput = {
   title: string;
   slug: string;
@@ -112,7 +111,9 @@ export async function deleteProject(id: string) {
 export async function fetchFeaturedProjects(limit = 3) {
   const { data, error } = await supabase
     .from("projects")
-    .select("id,title,slug,excerpt,content,tags,github_url,demo_url,image_url,is_featured,sort_order,status,created_at")
+    .select(
+      "id,title,slug,excerpt,content,tags,github_url,demo_url,image_url,is_featured,sort_order,status,created_at",
+    )
     .eq("is_featured", true)
     .order("sort_order", { ascending: true })
     .order("created_at", { ascending: false })
@@ -123,8 +124,6 @@ export async function fetchFeaturedProjects(limit = 3) {
   const rows = (data ?? []) as any[];
   return rows.map((r) => mapDbToProject(r));
 }
-
-
 
 export async function fetchProjectById(id: string): Promise<Project> {
   const { data, error } = await supabase

@@ -34,7 +34,7 @@ export function LoginPage() {
     <section className="mx-auto max-w-md space-y-6">
       <div className="space-y-2">
         <h1 className="text-3xl font-semibold tracking-tight">Login</h1>
-        <p className="text-slate-300 text-sm">Only for site owner.</p>
+        <p className="text-sm text-slate-300">Only for site owner.</p>
       </div>
 
       <form

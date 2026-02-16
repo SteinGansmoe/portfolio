@@ -27,7 +27,9 @@ export function useAuth() {
         const ok = await isAdmin(user.id);
         if (!isMounted) return;
 
-        setState(ok ? { status: "admin", userId: user.id } : { status: "user", userId: user.id });
+        setState(
+          ok ? { status: "admin", userId: user.id } : { status: "user", userId: user.id },
+        );
       } catch {
         if (!isMounted) return;
         setState({ status: "guest" });
