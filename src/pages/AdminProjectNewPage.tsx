@@ -40,8 +40,8 @@ export function AdminProjectNewPage() {
   return (
     <section className="space-y-6">
       <div className="space-y-2">
-        <Link className="text-sm text-slate-300 hover:text-white" to="/admin">
-          ← Tilbake
+        <Link className="text-sm text-slate-300 hover:text-violet-400" to="/admin">
+          ← Go back
         </Link>
         <h1 className="text-3xl font-semibold tracking-tight">New project</h1>
         <p className="text-slate-300">Add a new project.</p>
