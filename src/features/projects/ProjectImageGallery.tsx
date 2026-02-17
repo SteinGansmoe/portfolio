@@ -44,7 +44,7 @@ export function ProjectImageGallery({ images, title }: Props) {
             <button
               type="button"
               onClick={prev}
-              className="absolute left-3 top-1/2 -translate-y-1/2 rounded bg-slate-950/60 px-3 py-2 text-sm text-white backdrop-blur hover:bg-slate-950/80"
+              className="absolute left-3 top-1/2 -translate-y-1/2 rounded border border-slate-800/50 bg-slate-950/60 px-3 py-2 text-sm text-violet-400 backdrop-blur hover:bg-slate-950/80"
               aria-label="Previous image"
             >
               ←
@@ -52,7 +52,7 @@ export function ProjectImageGallery({ images, title }: Props) {
             <button
               type="button"
               onClick={next}
-              className="absolute right-3 top-1/2 -translate-y-1/2 rounded bg-slate-950/60 px-3 py-2 text-sm text-white backdrop-blur hover:bg-slate-950/80"
+              className="absolute right-3 top-1/2 -translate-y-1/2 rounded border border-slate-800/50 bg-slate-950/60 px-3 py-2 text-sm text-violet-400 backdrop-blur hover:bg-slate-950/80"
               aria-label="Next image"
             >
               →

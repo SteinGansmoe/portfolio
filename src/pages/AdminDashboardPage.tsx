@@ -79,7 +79,7 @@ export function AdminDashboardPage() {
       )}
 
       {status === "success" && (
-        <div className="overflow-hidden rounded-2xl border border-slate-800/70 bg-slate-900/30">
+        <div className="overflow-hidden rounded border border-slate-800/70 bg-slate-900/30">
           <div className="grid grid-cols-12 gap-3 border-b border-slate-800/70 px-4 py-3 text-xs text-slate-400">
             <div className="col-span-5">Title</div>
             <div className="col-span-3">Status</div>
@@ -90,7 +90,12 @@ export function AdminDashboardPage() {
           {projects.map((p) => (
             <div key={p.id} className="grid grid-cols-12 items-center gap-3 px-4 py-3">
               <div className="col-span-5">
-                <p className="text-sm font-medium text-slate-100">{p.title}</p>
+                <a
+                  href={`/projects/${p.slug}`}
+                  className="text-sm font-medium text-slate-100 hover:text-violet-400"
+                >
+                  {p.title}
+                </a>
                 <p className="text-xs text-slate-400">/{p.slug}</p>
               </div>
 

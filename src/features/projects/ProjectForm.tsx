@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { slugify } from "@/features/projects/slug";
 
 export type ProjectFormValues = {
@@ -6,12 +6,11 @@ export type ProjectFormValues = {
   slug: string;
   excerpt: string;
   content: string;
-  tagsText: string; // "React, TypeScript, Tailwind"
+  tagsText: string;
   githubUrl: string;
   demoUrl: string;
-  imageFile?: File | null;
   imageFiles?: File[];
-  removeImage?: boolean;
+  removeImage?: boolean; // MVP: remove ALL existing images
   status: "active" | "completed";
   isFeatured: boolean;
   sortOrder: number;
@@ -19,10 +18,14 @@ export type ProjectFormValues = {
 
 type Props = {
   initialValues?: Partial<ProjectFormValues>;
-  initialImageUrl?: string | null;
+  initialImageUrls?: string[]; // ✅ array
   submitLabel: string;
   onSubmit: (values: ProjectFormValues) => Promise<void> | void;
 };
+
+function filePreview(file: File) {
+  return URL.createObjectURL(file);
+}
 
 function toInt(value: string, fallback = 0) {
   const n = Number.parseInt(value, 10);
@@ -31,7 +34,7 @@ function toInt(value: string, fallback = 0) {
 
 export function ProjectForm({
   initialValues,
-  initialImageUrl,
+  initialImageUrls = [],
   submitLabel,
   onSubmit,
 }: Props) {
@@ -44,7 +47,7 @@ export function ProjectForm({
       tagsText: initialValues?.tagsText ?? "",
       githubUrl: initialValues?.githubUrl ?? "",
       demoUrl: initialValues?.demoUrl ?? "",
-      imageFile: null,
+      imageFiles: [],
       removeImage: false,
       status: initialValues?.status ?? "completed",
       isFeatured: initialValues?.isFeatured ?? false,
@@ -58,7 +61,7 @@ export function ProjectForm({
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [slugTouched, setSlugTouched] = useState<boolean>(!!defaults.slug);
 
-  const previewUrl = values.imageFile ? URL.createObjectURL(values.imageFile) : null;
+  const [previews, setPreviews] = useState<string[]>([]);
 
   function update<K extends keyof ProjectFormValues>(
     key: K,
@@ -69,18 +72,20 @@ export function ProjectForm({
 
   function handleTitleChange(nextTitle: string) {
     update("title", nextTitle);
-
-    // Auto fill slug when nothing else is specified.
     if (!slugTouched) {
       update("slug", slugify(nextTitle));
     }
   }
 
   useEffect(() => {
+    const files = values.imageFiles ?? [];
+    const next = files.map(filePreview);
+    setPreviews(next);
+
     return () => {
-      if (previewUrl) URL.revokeObjectURL(previewUrl);
+      next.forEach((url) => URL.revokeObjectURL(url));
     };
-  }, [previewUrl]);
+  }, [values.imageFiles]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -104,6 +109,9 @@ export function ProjectForm({
     values.content.trim().length > 10 &&
     values.githubUrl.trim().startsWith("http");
 
+  const hasExistingImages = initialImageUrls.length > 0;
+  const showExisting = hasExistingImages && !values.removeImage;
+
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       <div className="grid gap-4 sm:grid-cols-2">
@@ -116,67 +124,6 @@ export function ProjectForm({
             placeholder="Project name..."
             required
           />
-        </div>
-
-        <div className="space-y-2">
-          <label className="text-sm text-slate-200">Project image</label>
-
-          {/* Preview area */}
-          <div className="overflow-hidden rounded-lg border border-slate-800/60 bg-slate-950/20">
-            {previewUrl ? (
-              <img
-                src={previewUrl}
-                alt="New image preview"
-                className="h-44 w-full object-cover"
-              />
-            ) : initialImageUrl && !values.removeImage ? (
-              <img
-                src={initialImageUrl}
-                alt="Current project image"
-                className="h-44 w-full object-cover"
-              />
-            ) : (
-              <div className="h-44 w-full bg-slate-900/30" />
-            )}
-          </div>
-
-          {/* Controls */}
-          <div className="flex flex-wrap items-center gap-3">
-            <input
-              type="file"
-              accept="image/*"
-              multiple
-              onChange={(e) => {
-                const files = Array.from(e.target.files ?? []);
-                update("imageFiles", files);
-                // update("removeImages", []); // optional
-              }}
-            />
-
-            {/* Remove selected upload */}
-            {values.imageFile && (
-              <button
-                type="button"
-                className="btn-secondary"
-                onClick={() => update("imageFile", null)}
-              >
-                Remove selected
-              </button>
-            )}
-
-            {/* Remove current image (edit mode only) */}
-            {initialImageUrl && !values.imageFile && (
-              <button
-                type="button"
-                className={values.removeImage ? "btn-primary" : "btn-secondary"}
-                onClick={() => update("removeImage", !values.removeImage)}
-              >
-                {values.removeImage ? "Undo remove" : "Remove current"}
-              </button>
-            )}
-          </div>
-
-          <p className="text-xs text-slate-500">Recommended: 1600×900 (jpg/png/webp).</p>
         </div>
 
         <div className="space-y-2">
@@ -195,13 +142,105 @@ export function ProjectForm({
         </div>
       </div>
 
+      {/* Images */}
+      <div className="space-y-3">
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5">
+            <label className="text-sm text-slate-200">Project images</label>
+            <p className="text-xs text-slate-500">
+              Recommended: 1600×900 (16:9). Upload multiple images for the gallery.
+            </p>
+          </div>
+
+          {hasExistingImages && (
+            <button
+              type="button"
+              className={values.removeImage ? "btn-primary" : "btn-secondary"}
+              onClick={() => update("removeImage", !values.removeImage)}
+            >
+              {values.removeImage ? "Undo remove all" : "Remove all existing"}
+            </button>
+          )}
+        </div>
+
+        {/* Existing images grid (edit mode) */}
+        {showExisting && (
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+            {initialImageUrls.map((url) => (
+              <div
+                key={url}
+                className="overflow-hidden rounded border border-slate-800/60 bg-slate-900/30"
+              >
+                <img src={url} alt="" className="aspect-[16/9] w-full object-cover" />
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* File picker */}
+        <input
+          type="file"
+          accept="image/*"
+          multiple
+          className="block w-full text-sm text-slate-300 file:mr-3 file:rounded file:border-0 file:bg-slate-800 file:px-3 file:py-2 file:text-sm file:font-medium file:text-slate-100 hover:file:bg-slate-700"
+          onChange={(e) => {
+            const files = Array.from(e.target.files ?? []);
+            update("imageFiles", files);
+            update("removeImage", false);
+          }}
+        />
+
+        {/* Selected previews */}
+        {previews.length > 0 && (
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <p className="text-xs text-slate-400">Selected images</p>
+
+              <button
+                type="button"
+                className="btn-secondary"
+                onClick={() => update("imageFiles", [])}
+              >
+                Clear selected
+              </button>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+              {previews.map((src, i) => (
+                <div
+                  key={src}
+                  className="group relative overflow-hidden rounded border border-slate-800/60 bg-slate-900/30"
+                >
+                  <img src={src} alt="" className="aspect-[16/9] w-full object-cover" />
+
+                  <button
+                    type="button"
+                    className="absolute right-2 top-2 rounded bg-slate-950/70 px-2 py-1 text-xs text-white opacity-0 transition-opacity group-hover:opacity-100"
+                    onClick={() => {
+                      const files = values.imageFiles ?? [];
+                      update(
+                        "imageFiles",
+                        files.filter((_, idx) => idx !== i),
+                      );
+                    }}
+                    aria-label="Remove selected image"
+                  >
+                    ✕
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
       <div className="space-y-2">
         <label className="text-sm text-slate-200">Excerpt</label>
         <input
           className="w-full rounded-lg border border-slate-700 bg-slate-950/40 px-3 py-2 text-sm text-slate-100 outline-none focus:border-slate-500"
           value={values.excerpt}
           onChange={(e) => update("excerpt", e.target.value)}
-          placeholder="Kort beskrivelse for cards"
+          placeholder="Short description for cards"
           required
         />
       </div>
@@ -212,7 +251,7 @@ export function ProjectForm({
           className="min-h-44 w-full rounded-lg border border-slate-700 bg-slate-950/40 px-3 py-2 text-sm text-slate-100 outline-none focus:border-slate-500"
           value={values.content}
           onChange={(e) => update("content", e.target.value)}
-          placeholder="Skriv kort om problem, løsning, tech, highlights…"
+          placeholder="Write about problem, solution, tech, highlights…"
           required
         />
       </div>
@@ -234,7 +273,9 @@ export function ProjectForm({
             <select
               className="w-full rounded-lg border border-slate-700 bg-slate-950/40 px-3 py-2 text-sm text-slate-100 outline-none focus:border-slate-500"
               value={values.status}
-              onChange={(e) => update("status", e.target.value as any)}
+              onChange={(e) =>
+                update("status", e.target.value as ProjectFormValues["status"])
+              }
             >
               <option value="completed">Completed</option>
               <option value="active">Active</option>
