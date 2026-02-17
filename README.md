@@ -97,7 +97,7 @@ The project follows a feature-based folder structure to keep logic modular and s
 
 ### 1. Clone repository
 
-```git clone https://github.com/yourusername/portfolio.git```
+```git clone https://github.com/SteinGansmoe/portfolio.git```
 
 
 ### 2. Install dependencies
