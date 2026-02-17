@@ -108,10 +108,10 @@ The project follows a feature-based folder structure to keep logic modular and s
 ### 3. Setup environment variables
 
 Create a `.env` file in the root:
-
+```
 VITE_SUPABASE_URL=your_supabase_url
 VITE_SUPABASE_ANON_KEY=your_anon_key
-
+```
 
 ### 4. Start development server
 
