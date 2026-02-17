@@ -5,7 +5,7 @@ import { useAuth } from "../../features/auth/useAuth";
 function navLinkClass({ isActive }: { isActive: boolean }) {
   return [
     "text-sm font-medium transition-colors",
-    isActive ? "text-violet-400" : "text-slate-300 hover:text-white",
+    isActive ? "text-violet-400" : "text-slate-300 hover:text-violet-300",
   ].join(" ");
 }
 
@@ -15,8 +15,11 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-slate-800/60 bg-slate-950/80 backdrop-blur">
       <Container className="flex h-14 items-center justify-between">
-        <NavLink to="/" className="text-sm font-semibold tracking-tight text-white">
-          SteinGansmoe<span className="text-slate-400">.dev</span>
+        <NavLink
+          to="/"
+          className="text-sm font-semibold tracking-tight text-white hover:text-violet-300"
+        >
+          SteinGansmoe<span className="text-slate-400">.no</span>
         </NavLink>
 
         <nav className="flex items-center gap-5">
