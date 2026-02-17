@@ -78,7 +78,7 @@ This allows structured, readable case studies without requiring a rich text edit
 ---
 
 ## 🏗 Project Structure
-
+```
 src/
 features/
 auth/
@@ -86,6 +86,7 @@ projects/
 pages/
 components/
 lib/
+```
 
 
 The project follows a feature-based folder structure to keep logic modular and scalable.
