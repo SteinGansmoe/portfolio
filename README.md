@@ -1,4 +1,4 @@
-# SteinGansmoe.dev – Portfolio Website
+# SteinGansmoe.no – Portfolio Website
 
 A modern developer portfolio built with React, TypeScript and Tailwind CSS.  
 The site showcases selected projects, detailed case studies, and includes an authenticated admin panel for managing content dynamically via Supabase.
