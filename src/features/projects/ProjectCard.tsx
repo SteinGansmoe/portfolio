@@ -11,7 +11,7 @@ function StatusBadge({ status }: { status?: "active" | "completed" }) {
   const isActive = status === "active";
 
   const base =
-    "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium tracking-tight";
+    "inline-flex items-center gap-1.5 rounded border px-2.5 py-1 text-xs font-medium tracking-tight";
 
   const styles = isActive
     ? "border-violet-500/30 bg-violet-500/10 text-violet-200"
@@ -54,10 +54,10 @@ export function ProjectCard({ project }: Props) {
       aria-label={`Open project: ${project.title}`}
       onClick={goToProject}
       onKeyDown={handleKeyDown}
-      className="group cursor-pointer rounded border border-slate-800/50 bg-slate-900/20 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-violet-400 hover:bg-slate-900/40 hover:shadow-[0_8px_40px_-10px_rgba(139,92,246,0.25)] focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400/50"
+      className="group cursor-pointer rounded border border-slate-800/50 bg-slate-900/20 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-violet-400 hover:bg-slate-900/40 hover:shadow-[0_8px_40px_-5px_rgba(139,92,246,0.25)] focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400/50"
     >
       {/* Image */}
-      <div className="mb-4 aspect-[16/9] overflow-hidden rounded border border-slate-800/50 bg-slate-900/40">
+      <div className="mb-4 aspect-[16/9] overflow-hidden border border-slate-800/50 bg-slate-900/40">
         {project.imageUrl ? (
           <img
             style={{ imageRendering: "auto" }} // Remove this line

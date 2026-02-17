@@ -5,20 +5,23 @@ function getFileExt(name: string) {
   return parts.length > 1 ? parts.pop()!.toLowerCase() : "png";
 }
 
-export async function uploadProjectImage(file: File) {
-  const ext = getFileExt(file.name);
-  const fileName = `${crypto.randomUUID()}.${ext}`;
-  const path = `projects/${fileName}`;
+export async function uploadProjectImages(files: File[]) {
+  const uploaded: string[] = [];
 
-  const { error: uploadError } = await supabase.storage
-    .from("project-images")
-    .upload(path, file, {
-      cacheControl: "3600",
-      upsert: false,
-    });
+  for (const file of files) {
+    const ext = getFileExt(file.name);
+    const fileName = `${crypto.randomUUID()}.${ext}`;
+    const path = `projects/${fileName}`;
 
-  if (uploadError) throw new Error(uploadError.message);
+    const { error } = await supabase.storage
+      .from("project-images")
+      .upload(path, file, { cacheControl: "3600", upsert: false });
 
-  const { data } = supabase.storage.from("project-images").getPublicUrl(path);
-  return data.publicUrl;
+    if (error) throw new Error(error.message);
+
+    const { data } = supabase.storage.from("project-images").getPublicUrl(path);
+    uploaded.push(data.publicUrl);
+  }
+
+  return uploaded;
 }

@@ -10,6 +10,7 @@ export type ProjectFormValues = {
   githubUrl: string;
   demoUrl: string;
   imageFile?: File | null;
+  imageFiles?: File[];
   removeImage?: boolean;
   status: "active" | "completed";
   isFeatured: boolean;
@@ -144,12 +145,11 @@ export function ProjectForm({
             <input
               type="file"
               accept="image/*"
-              className="block text-sm text-slate-300 file:mr-3 file:rounded-lg file:border-0 file:bg-slate-800 file:px-3 file:py-2 file:text-sm file:font-medium file:text-slate-100 hover:file:bg-slate-700"
+              multiple
               onChange={(e) => {
-                const file = e.target.files?.[0] ?? null;
-                update("imageFile", file);
-                // selecting a new file implies we are NOT removing the image
-                update("removeImage", false);
+                const files = Array.from(e.target.files ?? []);
+                update("imageFiles", files);
+                // update("removeImages", []); // optional
               }}
             />
 

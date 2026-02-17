@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import type { Project } from "../features/projects/types";
 import { fetchProjectBySlug } from "../features/projects/api";
+import { ProjectImageGallery } from "@/features/projects/ProjectImageGallery";
 import ReactMarkdown from "react-markdown";
 
 type Status = "idle" | "loading" | "success" | "error" | "not_found";
@@ -88,6 +89,12 @@ export function ProjectDetailPage() {
   }
 
   if (!project) return null;
+  const images =
+    project.imageUrls && project.imageUrls.length > 0
+      ? project.imageUrls
+      : project.imageUrl
+        ? [project.imageUrl]
+        : [];
 
   return (
     <article className="space-y-6">
@@ -96,48 +103,53 @@ export function ProjectDetailPage() {
           ← Go back
         </Link>
 
-        <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-          {project.title}
-        </h1>
+        <section className="grid gap-8 lg:grid-cols-2 lg:items-start">
+          {/* Left: gallery */}
+          <ProjectImageGallery title={project.title} images={images} />
 
-        <p className="text-slate-300">{project.excerpt}</p>
+          {/* Right: info */}
+          <div className="space-y-4">
+            <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+              {project.title}
+            </h1>
 
-        <div className="flex flex-wrap gap-2 pt-2">
-          {project.tags.map((tag) => (
-            <span
-              key={tag}
-              className="rounded-full border border-slate-800 bg-slate-950/40 px-2.5 py-1 text-xs text-slate-300"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
+            <div className="flex flex-wrap gap-2">
+              {project.tags.map((t) => (
+                <span
+                  key={t}
+                  className="rounded border border-slate-800 bg-slate-950/30 px-2.5 py-1 text-xs text-slate-300"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
 
-        <div className="flex flex-wrap gap-3 pt-4 text-sm">
-          <a
-            href={project.githubUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="btn-secondary"
-          >
-            GitHub →
-          </a>
+            <p className="text-slate-300">{project.excerpt}</p>
 
-          {project.demoUrl ? (
-            <a
-              href={project.demoUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="btn-primary"
-            >
-              Live demo →
-            </a>
-          ) : (
-            <span className="rounded-lg border border-slate-800 px-3 py-2 text-slate-600">
-              Live demo
-            </span>
-          )}
-        </div>
+            <div className="flex flex-wrap gap-3">
+              <a
+                className="btn-secondary"
+                href={project.githubUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                GitHub
+              </a>
+              {project.demoUrl ? (
+                <a
+                  className="btn-primary"
+                  href={project.demoUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Live demo
+                </a>
+              ) : (
+                <span className="text-sm text-slate-500">Live demo unavailable</span>
+              )}
+            </div>
+          </div>
+        </section>
       </div>
 
       <section className="rounded border border-slate-800/70 bg-slate-900/30 p-5">

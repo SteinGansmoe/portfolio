@@ -8,6 +8,7 @@ export type Project = {
   githubUrl: string;
   demoUrl?: string | null;
   imageUrl?: string | null;
+  imageUrls?: string[];
   status?: "active" | "completed";
   isFeatured?: boolean;
   sortOrder?: number; // ✅

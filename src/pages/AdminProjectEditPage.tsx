@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { ProjectForm, type ProjectFormValues } from "../features/projects/ProjectForm";
 import { fetchProjectById, updateProject } from "../features/projects/api";
 import type { Project } from "../features/projects/types";
-import { uploadProjectImage } from "@/features/projects/storage";
+import { uploadProjectImages } from "@/features/projects/storage";
 
 type Status = "loading" | "ready" | "error" | "not_found";
 
@@ -78,14 +78,12 @@ export function AdminProjectEditPage() {
   async function handleSubmit(values: ProjectFormValues) {
     if (!id || !project) return;
 
-    let imageUrl = project.imageUrl ?? null;
+    let imageUrls = project.imageUrls ?? [];
 
-    if (values.removeImage) {
-      imageUrl = null;
-    }
+    if (values.removeImage) imageUrls = [];
 
-    if (values.imageFile) {
-      imageUrl = await uploadProjectImage(values.imageFile);
+    if (values.imageFiles?.length) {
+      imageUrls = await uploadProjectImages(values.imageFiles);
     }
 
     await updateProject(id, {
@@ -99,7 +97,9 @@ export function AdminProjectEditPage() {
       status: values.status,
       isFeatured: values.isFeatured,
       sortOrder: values.sortOrder,
-      imageUrl,
+
+      imageUrls,
+      imageUrl: imageUrls[0] ?? null,
     });
 
     navigate("/admin", { replace: true });

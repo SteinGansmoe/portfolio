@@ -1,7 +1,6 @@
-import { useNavigate, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ProjectForm, type ProjectFormValues } from "@/features/projects/ProjectForm";
-import { uploadProjectImage } from "@/features/projects/storage";
-
+import { uploadProjectImages } from "@/features/projects/storage";
 import { createProject } from "@/features/projects/api";
 
 function parseTags(tagsText: string): string[] {
@@ -15,10 +14,8 @@ export function AdminProjectNewPage() {
   const navigate = useNavigate();
 
   async function handleSubmit(values: ProjectFormValues) {
-    let imageUrl: string | null = null;
-    if (values.imageFile) {
-      imageUrl = await uploadProjectImage(values.imageFile);
-    }
+    const files = values.imageFiles ?? [];
+    const imageUrls = files.length > 0 ? await uploadProjectImages(files) : [];
 
     await createProject({
       title: values.title.trim(),
@@ -31,7 +28,12 @@ export function AdminProjectNewPage() {
       status: values.status,
       isFeatured: values.isFeatured,
       sortOrder: values.sortOrder,
-      imageUrl,
+
+      // NEW
+      imageUrls,
+
+      // Optional legacy cover image (first image)
+      imageUrl: imageUrls[0] ?? null,
     });
 
     navigate("/admin", { replace: true });
