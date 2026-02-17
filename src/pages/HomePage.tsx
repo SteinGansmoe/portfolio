@@ -30,7 +30,13 @@ export function HomePage() {
 
   return (
     <section className="space-y-10">
+      <section className="relative overflow-hidden rounded border border-slate-800/50 bg-slate-950/60">
+  {/* background glow layers */}
+  <div className="pointer-events-none absolute -top-24 right-[-160px] h-[420px] w-[420px] rounded-full bg-violet-500/20 blur-3xl" />
+  <div className="pointer-events-none absolute -bottom-28 left-[-180px] h-[460px] w-[460px] rounded-full bg-sky-500/10 blur-3xl" />
+  <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-slate-950/20 via-transparent to-slate-950/60" />
       {/* Hero */}
+        <div className="relative px-6 py-10 sm:px-10">
       <div className="space-y-4">
         <p className="text-sm text-slate-400">Front-End Developer</p>
         <h1 className="font-heading text-4xl font-semibold tracking-tight sm:text-5xl">
@@ -55,7 +61,8 @@ export function HomePage() {
           </a>
         </div>
       </div>
-
+    </div>
+  </section>
       {/* Featured */}
       <div className="space-y-4">
         <div className="flex items-end justify-between gap-4">
