@@ -3,7 +3,7 @@
 A modern developer portfolio built with React, TypeScript and Tailwind CSS.  
 The site showcases selected projects, detailed case studies, and includes an authenticated admin panel for managing content dynamically via Supabase.
 
-Live site: [https://yourdomain.dev](#)
+Live site: [https://steingansmoe.vercel.app](#)
 
 ---
 
