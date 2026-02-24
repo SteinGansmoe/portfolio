@@ -3,14 +3,17 @@ export function AboutPage() {
     <section className="space-y-16">
       <div className="grid gap-10 md:grid-cols-2 md:items-center">
         <div className="relative mx-auto w-full max-w-sm">
-          <div className="absolute -inset-2 rounded-xl bg-violet-500/20 blur-2xl" />
+          {/* Glow layer */}
+          <div className="absolute -inset-4 rounded bg-gradient-to-tr from-violet-600/30 via-indigo-500/20 to-transparent blur-2xl" />
 
-          <div className="relative overflow-hidden rounded-xl border border-slate-800/60 bg-slate-900/30 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.7)]">
+          {/* Image container */}
+          <div className="relative overflow-hidden rounded border border-slate-800/60 bg-slate-900/40 shadow-xl">
             <img
-              src="/crestauction.jpg"
+              src="/steinarild.jpg"
               alt="Stein Gansmoe"
-              className="h-full w-full object-cover"
+              className="aspect-[4/5] w-full object-cover object-[50%_30%]"
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent" />
           </div>
         </div>
         <div className="space-y-4">
