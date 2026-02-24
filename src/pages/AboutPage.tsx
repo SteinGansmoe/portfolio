@@ -50,10 +50,14 @@ export function AboutPage() {
       <div className="space-y-6">
         <h2 className="text-2xl font-semibold tracking-tight">Beyond code</h2>
         <p className="max-w-3xl text-slate-300">
-          Outside development, I’m passionate about gaming, technology, performance
-          optimization and continuously improving both technically and personally. I enjoy
-          deep-diving into systems and understanding how things work — whether it's
-          software architecture or game mechanics.
+          Outside of development, I spend most of my time with my girlfriend and our two
+          daughters. Family is a big part of my life, and I value the balance between
+          focused work and being present at home. In the evenings, I enjoy playing games
+          like League of Legends, World of Warcraft, and Total War: Warhammer III with
+          friends, it’s both a way to unwind and a space for strategy, teamwork, and good
+          conversations. After a long day, nothing beats relaxing on the couch with my
+          girlfriend, something good to drink, some snacks, and a great TV series or
+          movie.
         </p>
       </div>
     </section>
