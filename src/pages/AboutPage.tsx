@@ -52,12 +52,14 @@ export function AboutPage() {
         <p className="max-w-3xl text-slate-300">
           Outside of development, I spend most of my time with my girlfriend and our two
           daughters. Family is a big part of my life, and I value the balance between
-          focused work and being present at home. In the evenings, I enjoy playing games
-          like League of Legends, World of Warcraft, and Total War: Warhammer III with
-          friends, it’s both a way to unwind and a space for strategy, teamwork, and good
-          conversations. After a long day, nothing beats relaxing on the couch with my
-          girlfriend, something good to drink, some snacks, and a great TV series or
-          movie.
+          focused work and being present at home.
+        </p>
+        <p className="max-w-3xl text-slate-300">
+          In the evenings, I enjoy playing games like League of Legends, World of
+          Warcraft, and Total War: Warhammer III with friends, it’s both a way to unwind
+          and a space for strategy, teamwork, and good conversations. After a long day,
+          nothing beats relaxing on the couch with my girlfriend, something good to drink,
+          some snacks, and a great TV series or movie.
         </p>
       </div>
     </section>
