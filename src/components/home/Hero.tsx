@@ -1,10 +1,19 @@
 import { Link } from "react-router-dom";
 import { contactHref } from "@/lib/contact";
 
+
+type HeroProps = {
+  label: string;
+  title: string;
+  description: string;
+  imageUrl?: string;
+  hideCTA?: boolean;
+}
+
 const focusClass =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-4 focus-visible:ring-offset-[#0b1014]";
 
-export function Hero() {
+export function Hero({ label, title, description, imageUrl = "/images/valley-background.jpg", hideCTA = false }: HeroProps) {
   return (
     <section
       aria-labelledby="hero-heading"
@@ -12,7 +21,7 @@ export function Hero() {
     >
       {/* Decorative photograph: the text supplies the section's meaning. */}
       <img
-        src="/images/valley-background.jpg"
+        src={imageUrl}
         alt=""
         fetchPriority="high"
         width={1536}
@@ -25,22 +34,22 @@ export function Hero() {
       <div className="relative mx-auto flex min-h-[480px] max-w-5xl items-center px-6 pb-20 pt-14 sm:px-8 md:min-h-[380px] md:pb-16 md:pt-10">
         <div className="w-full max-w-[520px]">
           <p className="mb-4 text-[10px] font-medium uppercase tracking-[0.2em] text-[#b9bec3]">
-            Frontend Developer
+            {label}
           </p>
           <h1
             id="hero-heading"
             className="font-serif text-[clamp(2.75rem,6vw,4.25rem)] font-normal leading-[1.08] tracking-[-0.035em] [font-family:Georgia,'Times_New_Roman',serif]"
           >
-            Stein Gansmoe
+            {title}
           </h1>
           <p className="mt-5 max-w-[490px] text-[15px] leading-[1.65] text-[#c2c7cc] sm:text-base">
-            I build thoughtful, accessible and high-quality web experiences with modern
-            frontend technologies. Focused on clean code, great user experiences and
-            real-world impact.
+            {description}
           </p>
+          {!hideCTA && (
           <div className="mt-7 flex flex-wrap gap-4">
             <Link
               to="/projects"
+              
               className={`inline-flex min-h-11 items-center justify-center gap-4 rounded-lg border border-white bg-[#f5f5f3] px-5 py-3 text-xs font-medium text-[#10151a] transition-colors hover:bg-[#dfe3e6] ${focusClass}`}
             >
               View my work
@@ -50,11 +59,13 @@ export function Hero() {
             </Link>
             <a
               href={contactHref}
+              
               className={`inline-flex min-h-11 items-center justify-center rounded-lg border border-white/25 bg-[#0b1014]/25 px-6 py-3 text-xs font-medium text-[#f5f5f3] transition-colors hover:border-white/60 hover:bg-white/10 ${focusClass}`}
             >
               Get in touch
             </a>
           </div>
+          )}
         </div>
       </div>
 

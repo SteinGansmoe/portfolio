@@ -16,7 +16,7 @@ export function AppLayout({ children }: Props) {
     <div className="flex min-h-screen flex-col bg-slate-950 text-slate-100">
       <Navbar />
 
-      <main className={`flex-1 ${isHome ? "bg-portfolio-background" : "py-10"}`}>
+      <main className={`flex-1 ${isHome ? "bg-portfolio-background" : ""}`}>
         {isHome ? children : <Container>{children}</Container>}
       </main>
 
