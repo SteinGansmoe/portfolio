@@ -33,7 +33,7 @@ export function ProjectImageGallery({ images, title }: Props) {
         <div className="aspect-[16/9]">
           <img
             src={active}
-            alt={`${title} screenshot ${index + 1}`}
+            alt={`${title} image ${index + 1}`}
             className="h-full w-full object-cover"
             loading="lazy"
           />

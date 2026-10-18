@@ -67,8 +67,7 @@ export function ProjectsPage() {
 
       {status === "success" && projects.length === 0 && (
         <div className="rounded-2xl border border-slate-800/70 bg-slate-900/30 p-4 text-sm text-slate-300">
-          No projects yet. Add a new project to Supabase{" "}
-          <code className="text-slate-100">projects</code>.
+          No projects published yet.
         </div>
       )}
 
