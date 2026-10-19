@@ -24,7 +24,7 @@ export function Navbar() {
 
   return (
     <header
-      className="sticky top-0 z-50 bg-[#0b1014]/95 text-[#f5f5f3] backdrop-blur"
+      className="relative top-0 z-50 bg-transparent text-[#f5f5f3]"
       onKeyDown={(event) => {
         if (event.key === "Escape" && menuOpen) {
           closeMenu();
@@ -32,7 +32,7 @@ export function Navbar() {
         }
       }}
     >
-      <div className="mx-auto flex min-h-[72px] max-w-7xl flex-wrap items-center justify-between gap-x-4 px-6 sm:px-8 md:min-h-[64px]">
+      <div className="mx-auto flex min-h-[72px] max-w-[1440px] flex-wrap items-center justify-between gap-x-4 px-6 sm:px-8 md:min-h-[64px]">
         <NavLink
           to="/"
           onClick={closeMenu}

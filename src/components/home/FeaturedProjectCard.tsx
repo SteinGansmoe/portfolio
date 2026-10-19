@@ -61,7 +61,7 @@ export function FeaturedProjectCard({ project }: Props) {
           {project.tags.map((tag) => (
             <li
               key={tag}
-              className="rounded-full border border-portfolio-border bg-portfolio-background/40 px-2 py-1 text-[10px] leading-none text-portfolio-text"
+              className="rounded border border-portfolio-border bg-portfolio-background/40 px-2 py-1 text-[10px] leading-none text-portfolio-text"
             >
               {tag}
             </li>
