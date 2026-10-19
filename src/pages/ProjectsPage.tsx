@@ -23,7 +23,7 @@ const Project2 = {
 };
 
 const Project3 = {
-  id: "holidaze",
+  id: "holidaze1",
   title: "Holidaze",
   description: "A venue booking site built as the final semester project at Noroff Vocational School.",
   image: "/projects/holidaze/hero.png",
@@ -33,7 +33,7 @@ const Project3 = {
 };
 
 const Project4 = {
-  id: "holidaze",
+  id: "holidaze2",
   title: "Holidaze",
   description: "A venue booking site built as the final semester project at Noroff Vocational School.",
   image: "/projects/holidaze/hero.png",
@@ -43,7 +43,7 @@ const Project4 = {
 };
 
 const Project5 = {
-  id: "holidaze",
+  id: "holidaze3",
   title: "Holidaze",
   description: "A venue booking site built as the final semester project at Noroff Vocational School.",
   image: "/projects/holidaze/hero.png",
@@ -53,7 +53,7 @@ const Project5 = {
 };
 
 const Project6 = {
-  id: "holidaze",
+  id: "holidaze4",
   title: "Holidaze",
   description: "A venue booking site built as the final semester project at Noroff Vocational School.",
   image: "/projects/holidaze/hero.png",

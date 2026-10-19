@@ -13,8 +13,7 @@ type ProjectCardProps = {
 }
 
 
-export function ProjectCard({ 
-  id, 
+export function ProjectCard({  
   title, 
   description, 
   image, 
