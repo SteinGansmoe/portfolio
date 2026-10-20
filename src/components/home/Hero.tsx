@@ -8,6 +8,8 @@ type HeroProps = {
   description: string;
   imageUrl?: string;
   hideCTA?: boolean;
+  scrollTargetId?: string;
+  scrollLabel?: string;
 }
 
 const focusClass =
@@ -18,7 +20,9 @@ export function Hero({
   title, 
   description, 
   imageUrl = "/images/valley-background.jpg", 
-  hideCTA = false 
+  hideCTA = false,
+  scrollTargetId = "featured-projects",
+  scrollLabel = "Scroll to featured projects"
 }: HeroProps) {
   return (
     <section
@@ -90,8 +94,8 @@ export function Hero({
       </div>
 
       <a
-        href="#featured-projects"
-        aria-label="Scroll to featured projects"
+        href={`#${scrollTargetId}`}
+        aria-label={scrollLabel}
         className={`absolute bottom-5 left-6 inline-flex h-11 w-11 items-center justify-center rounded text-[#c2c7cc] transition-colors hover:text-white sm:left-8 lg:left-[max(2rem,calc((100%_-_76rem)_/_2))] ${focusClass}`}
       >
         <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="h-6 w-6">

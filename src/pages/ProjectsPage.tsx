@@ -75,6 +75,7 @@ export function ProjectsPage() {
       <Hero
         label="SELECTED WORK"
         title="Projects"
+        imageUrl="/images/projects-background.png"
         description="A collection of projects I've built, highlighting my skills and experience with modern web technologies."
         hideCTA
       />
