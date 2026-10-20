@@ -11,5 +11,6 @@ export type Project = {
   imageUrls?: string[];
   status?: "active" | "completed";
   isFeatured?: boolean;
-  sortOrder?: number; // ✅
+  /** Lower values appear first; equal values retain their order in data.ts. */
+  sortOrder?: number;
 };

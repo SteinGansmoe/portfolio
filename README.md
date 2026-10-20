@@ -1,141 +1,47 @@
-# SteinGansmoe.no – Portfolio Website
+# SteinGansmoe.no — Portfolio
 
-A modern developer portfolio built with React, TypeScript and Tailwind CSS.  
-The site showcases selected projects, detailed case studies, and includes an authenticated admin panel for managing content dynamically via Supabase.
+A developer portfolio built with React 19, TypeScript, Vite, Tailwind CSS and React Router. Project cards, image galleries and Markdown case studies use local typed data. No backend, account or environment variables are required.
 
-Live site: [https://steingansmoe.vercel.app](#)
+## Run locally
 
----
+Use Node.js 22.12+ (Node 24 LTS also works) and npm.
 
-## 🚀 Tech Stack
-
-### Frontend
-- React (Vite)
-- TypeScript
-- Tailwind CSS
-- Tailwind Typography plugin
-- React Router
-
-### Backend / Services
-- Supabase (Authentication, Database, Storage, Row Level Security)
-- Supabase Storage for project image uploads
-
-### Tooling
-- Prettier (with Tailwind plugin)
-- ESLint
-- Vercel (deployment)
-
----
-
-## ✨ Features
-
-- Fully responsive design
-- Image-based project gallery
-- Markdown-powered case studies
-- Admin dashboard for:
-  - Creating projects
-  - Editing projects
-  - Deleting projects
-  - Uploading and managing images
-- Role-based access control (admin-only dashboard)
-- Live authentication state handling (no page refresh required)
-- Clean, scalable component architecture
-
----
-
-## 🔐 Authentication & Authorization
-
-Authentication is handled via Supabase.
-
-- Admin users are stored in a dedicated `admins` table
-- Role-based access is enforced via:
-  - Route guards (`RequireAdmin`, `RequireGuest`)
-  - Supabase Row Level Security (RLS) policies
-- Navbar updates reactively using Supabase auth listeners
-
----
-
-## 🖼 Image Handling
-
-Project images are uploaded to Supabase Storage.
-
-- Images are previewed before upload
-- Existing images can be replaced or removed
-- Stored image URLs are persisted in the database
-- Recommended format: 1600×900 (16:9)
-
----
-
-## 📝 Markdown Case Studies
-
-Project descriptions are written in Markdown and rendered using:
-
-- `react-markdown`
-- Tailwind Typography plugin
-
-This allows structured, readable case studies without requiring a rich text editor.
-
----
-
-## 🏗 Project Structure
-```
-src/
-features/
-auth/
-projects/
-pages/
-components/
-lib/
+```sh
+npm ci
+npm run dev
 ```
 
+Open the local URL printed by Vite (normally http://localhost:5173).
 
-The project follows a feature-based folder structure to keep logic modular and scalable.
+## Checks and production preview
 
----
-
-## ⚙️ Local Development
-
-### 1. Clone repository
-
-```git clone https://github.com/SteinGansmoe/portfolio.git```
-
-
-### 2. Install dependencies
-
-```npm install```
-
-
-### 3. Setup environment variables
-
-Create a `.env` file in the root:
-```
-VITE_SUPABASE_URL=your_supabase_url
-VITE_SUPABASE_ANON_KEY=your_anon_key
+```sh
+npm run lint
+npm run build
+npm run preview
 ```
 
-### 4. Start development server
+`build` runs TypeScript project checks (`tsc -b`) before building with Vite. `preview` serves the production build locally, normally at http://localhost:4173. `npm run format:check` checks Prettier formatting.
 
-```npm run dev```
+## Manage project content
 
+Edit `src/features/projects/data.ts`. Each entry is checked against the existing `Project` type in `src/features/projects/types.ts`.
 
----
+- Use a unique, stable `id` and URL-safe `slug`; the detail URL is `/projects/<slug>`.
+- Set `title`, `excerpt`, Markdown `content`, `tags` and `githubUrl`.
+- Optional `demoUrl` adds a live-site link. Omit it if unverified.
+- Put assets in `public/projects/<slug>/`. Use `/projects/<slug>/file.png` for `imageUrl` (card cover) and `imageUrls` (ordered gallery). Omit images if none are verified; the existing components support empty galleries.
+- Set `isFeatured: true` to include a project on Home (up to three). `sortOrder` controls ascending display order; ties retain file order.
+- Optional `status` is `active` or `completed`; omit it if unknown.
 
-## 🚀 Deployment
+For example, copy an existing object in the array, replace its verified content and links, and add its assets. Changes are stored in source, not browser storage; rebuild to include them in the production bundle.
 
-The project is deployed on Vercel.
+About information and skills remain in `src/pages/AboutPage.tsx`; introductory content remains in `src/pages/HomePage.tsx`.
 
-Environment variables must also be configured in the Vercel dashboard.
+## Supabase migration
 
----
+The former Supabase client, project queries, uploads, authentication, login and admin tools have been removed. Content is now managed in source. Former login/admin URLs show the public page-not-found fallback.
 
-## 📌 Purpose of This Project
+LaneStomp and Holidaze use verified repository information and existing assets. Original database case-study text and some media are still missing. See [content recovery notes](docs/content-recovery.md) for exact sources, asset hashes, recovery gaps and lockfile preservation details. Supabase mentioned in personal skills or another project's technology list is descriptive text only.
 
-This portfolio is designed to:
-
-- Showcase my technical skills
-- Demonstrate architectural thinking
-- Present real-world React + TypeScript development
-- Provide a scalable, production-style content system
-
-It reflects how I approach frontend engineering:
-clean structure, thoughtful UX, and maintainable systems.
+The existing layout, styles, public navigation, photos, favicons, cards and case-study components are retained. No deployment or remote database changes are part of this migration.

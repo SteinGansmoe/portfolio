@@ -1,16 +1,11 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import { AppLayout } from "./components/layout/AppLayout";
 
 import { HomePage } from "./pages/HomePage";
 import { ProjectsPage } from "./pages/ProjectsPage";
 import { AboutPage } from "./pages/AboutPage";
+import { ContactPage } from "./pages/ContactPage";
 import { ProjectDetailPage } from "./pages/ProjectDetailPage";
-import { LoginPage } from "./pages/LoginPage";
-import { AdminDashboardPage } from "./pages/AdminDashboardPage";
-import { RequireAdmin } from "./features/auth/RequireAdmin";
-import { AdminProjectNewPage } from "./pages/AdminProjectNewPage";
-import { AdminProjectEditPage } from "./pages/AdminProjectEditPage";
-import { RequireGuest } from "@/features/auth/RequireGuest";
 
 function App() {
   return (
@@ -20,20 +15,21 @@ function App() {
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/projects/:slug" element={<ProjectDetailPage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/contact" element={<ContactPage />} />
         <Route
-          path="/login"
+          path="*"
           element={
-            <RequireGuest>
-              <LoginPage />
-            </RequireGuest>
+            <div className="space-y-4">
+              <h1 className="text-slate-300">Page not found.</h1>
+              <Link
+                className="portfolio-focus rounded text-sm text-slate-300 hover:text-white"
+                to="/"
+              >
+                ← Go back home
+              </Link>
+            </div>
           }
         />
-
-        <Route element={<RequireAdmin />}>
-          <Route path="/admin" element={<AdminDashboardPage />} />
-          <Route path="/admin/projects/new" element={<AdminProjectNewPage />} />
-          <Route path="/admin/projects/:id/edit" element={<AdminProjectEditPage />} />
-        </Route>
       </Routes>
     </AppLayout>
   );

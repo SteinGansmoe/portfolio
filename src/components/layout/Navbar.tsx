@@ -1,53 +1,103 @@
+import { useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Container } from "./Container";
-import { useAuth } from "../../features/auth/useAuth";
+import { contactHref } from "@/lib/contact";
+
+const focusClass =
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-4 focus-visible:ring-offset-[#0b1014]";
 
 function navLinkClass({ isActive }: { isActive: boolean }) {
   return [
-    "text-sm font-medium transition-colors",
-    isActive ? "text-violet-400" : "text-slate-300 hover:text-violet-300",
+    `rounded-sm py-2 text-xs transition-colors hover:text-white motion-reduce:transition-none ${focusClass}`,
+    isActive
+      ? "text-white underline decoration-white underline-offset-4"
+      : "text-[#c2c7cc]",
   ].join(" ");
 }
 
 export function Navbar() {
-  const auth = useAuth();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuButton = useRef<HTMLButtonElement>(null);
+
+  function closeMenu() {
+    setMenuOpen(false);
+  }
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-800/60 bg-slate-950/80 backdrop-blur">
-      <Container className="flex h-14 items-center justify-between">
+    <header
+      className="relative top-0 z-50 bg-[linear-gradient(to_bottom,rgba(11,16,20,0.9),rgba(11,16,20,0.84)_72%,rgba(11,16,20,0.78))] text-[#f5f5f3] after:pointer-events-none after:absolute after:inset-x-0 after:top-full after:h-12 after:bg-[linear-gradient(to_bottom,rgba(11,16,20,0.78),transparent)]"
+      onKeyDown={(event) => {
+        if (event.key === "Escape" && menuOpen) {
+          closeMenu();
+          menuButton.current?.focus();
+        }
+      }}
+    >
+      <div className="mx-auto flex min-h-[72px] max-w-[1440px] flex-wrap items-center justify-between gap-x-4 px-6 sm:px-8 md:min-h-[64px]">
         <NavLink
           to="/"
-          className="text-sm font-semibold tracking-tight text-white hover:text-violet-300"
+          onClick={closeMenu}
+          aria-label="Stein Gansmoe — Home"
+          className={`inline-flex items-center gap-5 rounded-sm transition-colors hover:text-white motion-reduce:transition-none ${focusClass}`}
         >
-          SteinGansmoe<span className="text-slate-400">.no</span>
+          <img
+            src="/navbarlogo.webp"
+            alt=""
+            width={36}
+            height={36}
+            className="h-9 w-9 shrink-0 object-cover"
+          />
+          <span className="text-lg [font-family:Georgia,'Times_New_Roman',serif]">
+            Stein Gansmoe
+          </span>
         </NavLink>
 
-        <nav className="flex items-center gap-5">
-          <NavLink to="/" className={navLinkClass} end>
+        <button
+          ref={menuButton}
+          type="button"
+          aria-expanded={menuOpen}
+          aria-controls="primary-navigation"
+          aria-label={menuOpen ? "Close navigation" : "Open navigation"}
+          onClick={() => setMenuOpen((open) => !open)}
+          className={`inline-flex h-11 w-11 items-center justify-center rounded border border-white/20 transition-colors hover:bg-white/10 motion-reduce:transition-none md:hidden ${focusClass}`}
+        >
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="h-5 w-5">
+            <path
+              d={menuOpen ? "m6 6 12 12M6 18 18 6" : "M4 7h16M4 12h16M4 17h16"}
+              stroke="currentColor"
+              strokeWidth="1.3"
+            />
+          </svg>
+        </button>
+
+        <nav
+          id="primary-navigation"
+          aria-label="Main navigation"
+          className={`${menuOpen ? "flex" : "hidden"} absolute left-0 top-full w-full flex-col items-center gap-3 border-t border-white/10 bg-[#0b1014] pb-6 pt-4 text-center font-medium md:static md:flex md:w-auto md:flex-row md:items-center md:gap-8 md:border-0 md:bg-transparent md:py-0`}
+        >
+          <NavLink to="/" end className={navLinkClass} onClick={closeMenu}>
             Home
           </NavLink>
-          <NavLink to="/projects" className={navLinkClass}>
+          <NavLink to="/projects" className={navLinkClass} onClick={closeMenu}>
             Projects
           </NavLink>
-          <NavLink to="/about" className={navLinkClass}>
+          <NavLink to="/about" className={navLinkClass} onClick={closeMenu}>
             About
           </NavLink>
-
-          {auth.status === "loading" && <span className="text-xs text-slate-500">…</span>}
-
-          {auth.status === "guest" && (
-            <NavLink to="/login" className={navLinkClass}>
-              Login
-            </NavLink>
-          )}
-
-          {auth.status === "admin" && (
-            <NavLink to="/admin" className={navLinkClass}>
-              Admin
-            </NavLink>
-          )}
+          <NavLink to="/contact" onClick={closeMenu} className={navLinkClass}>
+            Contact
+          </NavLink>
+          <a
+            href={contactHref}
+            onClick={closeMenu}
+            className={`inline-flex min-h-9 items-center justify-center gap-4 self-center rounded-lg border border-white/20 px-4 py-2 text-xs transition-colors hover:border-white/50 hover:bg-white/5 motion-reduce:transition-none md:ml-4 ${focusClass}`}
+          >
+            Let’s talk
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="h-4 w-4">
+              <path d="M4 12h16m-6-6 6 6-6 6" stroke="currentColor" strokeWidth="1.3" />
+            </svg>
+          </a>
         </nav>
-      </Container>
+      </div>
     </header>
   );
 }
