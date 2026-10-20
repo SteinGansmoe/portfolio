@@ -109,8 +109,7 @@ export function AboutPage() {
         description="A little about who I am, what drives me, and why I love building things for the web."
         hideCTA
         imageUrl="/images/about-background.png"
-        scrollTargetId="about-introduction"
-        scrollLabel="Scroll to a little about me"
+        showDecorativeText={false}
       />
 
       <Container className="px-4 font-portfolio-sans text-portfolio-text sm:px-6 lg:px-8">

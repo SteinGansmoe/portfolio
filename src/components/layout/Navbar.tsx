@@ -7,9 +7,9 @@ const focusClass =
 
 function navLinkClass({ isActive }: { isActive: boolean }) {
   return [
-    `rounded-sm py-2 text-xs transition-colors hover:text-white ${focusClass}`,
+    `rounded-sm py-2 text-xs transition-colors hover:text-white motion-reduce:transition-none ${focusClass}`,
     isActive
-      ? "text-white underline decoration-white/50 underline-offset-4"
+      ? "text-white underline decoration-white underline-offset-4"
       : "text-[#c2c7cc]",
   ].join(" ");
 }
@@ -24,7 +24,7 @@ export function Navbar() {
 
   return (
     <header
-      className="relative top-0 z-50 bg-transparent text-[#f5f5f3]"
+      className="relative top-0 z-50 bg-[linear-gradient(to_bottom,rgba(11,16,20,0.9),rgba(11,16,20,0.84)_72%,rgba(11,16,20,0.78))] text-[#f5f5f3] after:pointer-events-none after:absolute after:inset-x-0 after:top-full after:h-12 after:bg-[linear-gradient(to_bottom,rgba(11,16,20,0.78),transparent)]"
       onKeyDown={(event) => {
         if (event.key === "Escape" && menuOpen) {
           closeMenu();
@@ -32,12 +32,12 @@ export function Navbar() {
         }
       }}
     >
-      <div className="mx-auto flex min-h-[72px] max-w-[1440px] flex-wrap  items-center justify-between gap-x-4 px-6 sm:px-8 md:min-h-[64px]">
+      <div className="mx-auto flex min-h-[72px] max-w-[1440px] flex-wrap items-center justify-between gap-x-4 px-6 sm:px-8 md:min-h-[64px]">
         <NavLink
           to="/"
           onClick={closeMenu}
           aria-label="Stein Gansmoe — Home"
-          className={`inline-flex items-center gap-5 rounded-sm transition-colors hover:text-white ${focusClass}`}
+          className={`inline-flex items-center gap-5 rounded-sm transition-colors hover:text-white motion-reduce:transition-none ${focusClass}`}
         >
           <span
             aria-hidden="true"
@@ -57,7 +57,7 @@ export function Navbar() {
           aria-controls="primary-navigation"
           aria-label={menuOpen ? "Close navigation" : "Open navigation"}
           onClick={() => setMenuOpen((open) => !open)}
-          className={`inline-flex h-11 w-11 items-center justify-center rounded border border-white/20 transition-colors hover:bg-white/10 md:hidden ${focusClass}`}
+          className={`inline-flex h-11 w-11 items-center justify-center rounded border border-white/20 transition-colors hover:bg-white/10 motion-reduce:transition-none md:hidden ${focusClass}`}
         >
           <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="h-5 w-5">
             <path
@@ -71,7 +71,7 @@ export function Navbar() {
         <nav
           id="primary-navigation"
           aria-label="Main navigation"
-          className={`${menuOpen ? "flex" : "hidden"} absolute items-center text-center md:static top-full left-0 w-full flex-col gap-3 border-t md:bg-transparent bg-[#0b1014] border-white/10 pb-6 pt-4 md:flex md:w-auto md:flex-row md:items-center md:gap-8 md:border-0 md:py-0`}
+          className={`${menuOpen ? "flex" : "hidden"} absolute left-0 top-full w-full flex-col items-center gap-3 border-t border-white/10 bg-[#0b1014] pb-6 pt-4 text-center font-medium md:static md:flex md:w-auto md:flex-row md:items-center md:gap-8 md:border-0 md:bg-transparent md:py-0`}
         >
           <NavLink to="/" end className={navLinkClass} onClick={closeMenu}>
             Home
@@ -85,14 +85,14 @@ export function Navbar() {
           <a
             href={contactHref}
             onClick={closeMenu}
-            className={`rounded-sm py-2 text-xs text-[#c2c7cc] transition-colors hover:text-white ${focusClass}`}
+            className={`rounded-sm py-2 text-xs text-[#c2c7cc] transition-colors hover:text-white motion-reduce:transition-none ${focusClass}`}
           >
             Contact
           </a>
           <a
             href={contactHref}
             onClick={closeMenu}
-            className={`inline-flex min-h-9 items-center justify-center self-center gap-4 rounded-lg border border-white/20 px-4 py-2 text-xs transition-colors hover:border-white/50 hover:bg-white/5 md:ml-4 ${focusClass}`}
+            className={`inline-flex min-h-9 items-center justify-center gap-4 self-center rounded-lg border border-white/20 px-4 py-2 text-xs transition-colors hover:border-white/50 hover:bg-white/5 motion-reduce:transition-none md:ml-4 ${focusClass}`}
           >
             Let’s talk
             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="h-4 w-4">

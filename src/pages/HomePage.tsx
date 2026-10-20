@@ -8,6 +8,7 @@ export function HomePage() {
       <Hero
         label="Frontend Developer"
         title="Stein Gansmoe"
+        showDecorativeText
         description="I build thoughtful, accessible and high-quality web experiences with modern frontend technologies. Focused on clean code, great user experiences and real-world impact."
       />
       <div className="bg-portfolio-background font-portfolio-sans text-portfolio-text">
