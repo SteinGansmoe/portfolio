@@ -1,14 +1,6 @@
 import { Link } from "react-router-dom";
-import { contactHref } from "@/lib/contact";
-
-type HeroProps = {
-  label: string;
-  title: string;
-  description: string;
-  imageUrl?: string;
-  hideCTA?: boolean;
-  showDecorativeText?: boolean;
-};
+import type { HeroContent } from "@/data/heroes";
+import { HeroBackground } from "./HeroBackground";
 
 const focusClass =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-4 focus-visible:ring-offset-[#0b1014]";
@@ -17,10 +9,10 @@ export function Hero({
   label,
   title,
   description,
-  imageUrl = "/images/valley-background.jpg",
+  imageUrl,
   hideCTA = false,
   showDecorativeText = false,
-}: HeroProps) {
+}: HeroContent) {
   return (
     <section
       data-hero
@@ -28,14 +20,7 @@ export function Hero({
       className="relative isolate -mt-[72px] overflow-hidden border-b border-white/[0.06] bg-[#0b1014] text-[#f5f5f3] md:-mt-16"
     >
       {/* Decorative photograph: the text supplies the section's meaning. */}
-      <img
-        src={imageUrl}
-        alt=""
-        fetchPriority="high"
-        width={1536}
-        height={2048}
-        className="absolute inset-y-0 right-0 -z-20 h-full w-full object-cover object-[center_42%] md:w-[min(100%,96rem)] md:[mask-image:linear-gradient(to_right,transparent,black_32%)]"
-      />
+      <HeroBackground src={imageUrl} />
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(90deg,#0b1014_0%,rgba(11,16,20,0.96)_35%,rgba(11,16,20,0.8)_60%,rgba(11,16,20,0.32)_100%)] max-md:bg-[linear-gradient(90deg,rgba(11,16,20,0.94),rgba(11,16,20,0.74))]" />
       <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-[#0b1014]/30 via-transparent to-[#0b1014]/65" />
 
@@ -73,12 +58,12 @@ export function Hero({
                   />
                 </svg>
               </Link>
-              <a
-                href={contactHref}
+              <Link
+                to="/contact"
                 className={`inline-flex min-h-11 items-center justify-center rounded-lg border border-white/25 bg-[#0b1014]/25 px-6 py-3 text-xs font-medium text-[#f5f5f3] transition-colors hover:border-white/60 hover:bg-white/10 motion-reduce:transition-none ${focusClass}`}
               >
                 Get in touch
-              </a>
+              </Link>
             </div>
           )}
         </div>

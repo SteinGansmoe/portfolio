@@ -6,6 +6,25 @@ body {
   @apply font-sans;
 }
 
+@keyframes hero-image-crossfade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.hero-image-crossfade {
+  animation: hero-image-crossfade 450ms ease-in-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-image-crossfade {
+    animation: none;
+  }
+}
+
 @layer components {
   .portfolio-container {
     @apply mx-auto w-full max-w-portfolio px-6 sm:px-8;

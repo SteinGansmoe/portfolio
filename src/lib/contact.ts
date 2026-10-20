@@ -1,2 +1,3 @@
-// Shared by the navigation and hero so every contact link stays in sync.
-export const contactHref = "mailto:steina89@hotmail.com";
+// One source for displayed contact details and direct email actions.
+export const contactEmail = "steina89@hotmail.com";
+export const contactHref = `mailto:${contactEmail}`;

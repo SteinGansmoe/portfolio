@@ -72,8 +72,11 @@ export function ProjectDetailPage() {
   if (status === "not_found") {
     return (
       <div className="space-y-4">
-        <p className="text-slate-300">Could not locate project.</p>
-        <Link className="text-sm text-slate-300 hover:text-white" to="/projects">
+        <h1 className="text-slate-300">Could not locate project.</h1>
+        <Link
+          className="portfolio-focus rounded text-sm text-slate-300 hover:text-white"
+          to="/projects"
+        >
           ← Go back to projects
         </Link>
       </div>

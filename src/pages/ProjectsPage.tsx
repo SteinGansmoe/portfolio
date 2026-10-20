@@ -1,4 +1,3 @@
-import { Hero } from "../components/home/Hero";
 import { Container } from "../components/layout/Container";
 import { ProjectCard } from "../features/projects/ProjectCard";
 
@@ -8,7 +7,7 @@ const Project1 = {
   description:
     "A League of Legends platform for matchup guides, counter picks and champion insights.",
   image: "/projects/lanestomp/homepage.jpg",
-  technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
+  technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase", "OpenAI", "Vercel"],
   githubUrl: "https://github.com/SteinGansmoe/lanestomp",
   liveUrl: "https://lanestomp.com",
 };
@@ -17,70 +16,40 @@ const Project2 = {
   id: "holidaze",
   title: "Holidaze",
   description:
-    "A venue booking site built as the final semester project at Noroff Vocational School.",
+    "A responsive venue booking platform built with React and TypeScript, featuring bookings, user authentication and venue management.",
   image: "/projects/holidaze/hero.png",
-  technologies: ["React", "Node.js", "PostgreSQL"],
-  githubUrl: "https://github.com/SteinGansmoe/holidaze",
+  technologies: ["React", "TypeScript", "Tailwind CSS", "Noroff API", "Figma", "Vercel"],
+  githubUrl: "https://github.com/SteinGansmoe/holidaze-retreats",
   liveUrl: "https://holidaze-retreats.vercel.app/",
 };
 
 const Project3 = {
-  id: "holidaze1",
-  title: "Holidaze",
+  id: "packlinemalbok",
+  title: "Packline Malbok",
   description:
-    "A venue booking site built as the final semester project at Noroff Vocational School.",
-  image: "/projects/holidaze/hero.png",
-  technologies: ["React", "Node.js", "PostgreSQL"],
-  githubUrl: "https://github.com/SteinGansmoe/holidaze",
-  liveUrl: "https://holidaze-retreats.vercel.app/",
+    "An internal workplace tool for managing vehicle fitting information and tracking customization workflows, helping employees coordinate daily tasks.",
+  image: "/projects/packlinemalbok/packline-carshowcase.png",
+  technologies: ["JavaScript", "Tailwind CSS", "Supabase", "Netlify"],
+  githubUrl: "https://github.com/SteinGansmoe/packlineMalbok",
+  liveUrl: "https://packlinemalbok.netlify.app/",
 };
 
 const Project4 = {
-  id: "holidaze2",
-  title: "Holidaze",
+  id: "portfolio",
+  title: "Portfolio",
   description:
-    "A venue booking site built as the final semester project at Noroff Vocational School.",
-  image: "/projects/holidaze/hero.png",
-  technologies: ["React", "Node.js", "PostgreSQL"],
-  githubUrl: "https://github.com/SteinGansmoe/holidaze",
-  liveUrl: "https://holidaze-retreats.vercel.app/",
+    "My personal developer portfolio, built to showcase my projects, technical skills and approach to development.",
+  image: "/projects/portfolio/homepage.webp",
+  technologies: ["React", "TypeScript", "Tailwind CSS", "Vite", "Vercel"],
+  githubUrl: "https://github.com/SteinGansmoe/portfolio",
+  liveUrl: "https://steingansmoe.no/",
 };
 
-const Project5 = {
-  id: "holidaze3",
-  title: "Holidaze",
-  description:
-    "A venue booking site built as the final semester project at Noroff Vocational School.",
-  image: "/projects/holidaze/hero.png",
-  technologies: ["React", "Node.js", "PostgreSQL"],
-  githubUrl: "https://github.com/SteinGansmoe/holidaze",
-  liveUrl: "https://holidaze-retreats.vercel.app/",
-};
-
-const Project6 = {
-  id: "holidaze4",
-  title: "Holidaze",
-  description:
-    "A venue booking site built as the final semester project at Noroff Vocational School.",
-  image: "/projects/holidaze/hero.png",
-  technologies: ["React", "Node.js", "PostgreSQL"],
-  githubUrl: "https://github.com/SteinGansmoe/holidaze",
-  liveUrl: "https://holidaze-retreats.vercel.app/",
-};
-const projects = [Project1, Project2, Project3, Project4, Project5, Project6];
+const projects = [Project1, Project2, Project3, Project4];
 
 export function ProjectsPage() {
   return (
     <>
-      <Hero
-        label="SELECTED WORK"
-        title="Projects"
-        showDecorativeText={false}
-        imageUrl="/images/projects-background.png"
-        description="A collection of projects I've built, highlighting my skills and experience with modern web technologies."
-        hideCTA
-      />
-
       <Container className="my-6 grid grid-cols-1 items-stretch gap-4 px-4 sm:my-8 sm:px-6 lg:auto-rows-fr lg:grid-cols-2 lg:px-8">
         {projects.map((project) => (
           <ProjectCard key={project.id} {...project} />

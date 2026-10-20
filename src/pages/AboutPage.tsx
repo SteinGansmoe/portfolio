@@ -1,7 +1,6 @@
-import { Hero } from "@/components/home/Hero";
 import { Container } from "@/components/layout/Container";
 import { ArrowRight } from "@/components/ui/ArrowRight";
-import { contactHref } from "@/lib/contact";
+import { Link } from "react-router-dom";
 import { TechnologyTile } from "@/components/ui/TechnologyTile";
 import { technologyCatalog } from "@/data/technologies";
 
@@ -103,15 +102,6 @@ const milestones: Milestone[] = [
 export function AboutPage() {
   return (
     <>
-      <Hero
-        label="BEHIND THE CODE"
-        title="About Me"
-        description="A little about who I am, what drives me, and why I love building things for the web."
-        hideCTA
-        imageUrl="/images/about-background.png"
-        showDecorativeText={false}
-      />
-
       <Container className="px-4 font-portfolio-sans text-portfolio-text sm:px-6 lg:px-8">
         <section
           id="about-introduction"
@@ -262,9 +252,9 @@ export function AboutPage() {
               connecting with people who enjoy building great things.
             </p>
           </div>
-          <a href={contactHref} className="portfolio-button min-h-11 shrink-0">
+          <Link to="/contact" className="portfolio-button min-h-11 shrink-0">
             Get in touch <ArrowRight />
-          </a>
+          </Link>
         </section>
       </Container>
     </>

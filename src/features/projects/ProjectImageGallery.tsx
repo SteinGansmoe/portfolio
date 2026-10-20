@@ -44,7 +44,7 @@ export function ProjectImageGallery({ images, title }: Props) {
             <button
               type="button"
               onClick={prev}
-              className="absolute left-3 top-1/2 -translate-y-1/2 rounded border border-slate-800/50 bg-slate-950/60 px-3 py-2 text-sm text-violet-400 backdrop-blur hover:bg-slate-950/80"
+              className="portfolio-focus absolute left-3 top-1/2 -translate-y-1/2 rounded border border-slate-800/50 bg-slate-950/80 px-3 py-2 text-sm text-slate-100 backdrop-blur hover:bg-slate-950/80"
               aria-label="Previous image"
             >
               ←
@@ -52,7 +52,7 @@ export function ProjectImageGallery({ images, title }: Props) {
             <button
               type="button"
               onClick={next}
-              className="absolute right-3 top-1/2 -translate-y-1/2 rounded border border-slate-800/50 bg-slate-950/60 px-3 py-2 text-sm text-violet-400 backdrop-blur hover:bg-slate-950/80"
+              className="portfolio-focus absolute right-3 top-1/2 -translate-y-1/2 rounded border border-slate-800/50 bg-slate-950/80 px-3 py-2 text-sm text-slate-100 backdrop-blur hover:bg-slate-950/80"
               aria-label="Next image"
             >
               →
@@ -72,12 +72,13 @@ export function ProjectImageGallery({ images, title }: Props) {
                 key={src}
                 onClick={() => setIndex(i)}
                 className={[
-                  "shrink-0 overflow-hidden rounded border transition",
+                  "portfolio-focus shrink-0 overflow-hidden rounded border transition motion-reduce:transition-none",
                   isActive
                     ? "border-violet-400/70"
                     : "border-slate-800/50 hover:border-slate-700",
                 ].join(" ")}
                 aria-label={`View image ${i + 1}`}
+                aria-pressed={isActive}
               >
                 <img src={src} alt="" className="h-16 w-28 object-cover" loading="lazy" />
               </button>

@@ -39,12 +39,13 @@ export function Navbar() {
           aria-label="Stein Gansmoe — Home"
           className={`inline-flex items-center gap-5 rounded-sm transition-colors hover:text-white motion-reduce:transition-none ${focusClass}`}
         >
-          <span
-            aria-hidden="true"
-            className="text-[27px] font-light leading-none tracking-[-0.06em]"
-          >
-            SG
-          </span>
+          <img
+            src="/navbarlogo.webp"
+            alt=""
+            width={36}
+            height={36}
+            className="h-9 w-9 shrink-0 object-cover"
+          />
           <span className="text-lg [font-family:Georgia,'Times_New_Roman',serif]">
             Stein Gansmoe
           </span>
@@ -82,13 +83,9 @@ export function Navbar() {
           <NavLink to="/about" className={navLinkClass} onClick={closeMenu}>
             About
           </NavLink>
-          <a
-            href={contactHref}
-            onClick={closeMenu}
-            className={`rounded-sm py-2 text-xs text-[#c2c7cc] transition-colors hover:text-white motion-reduce:transition-none ${focusClass}`}
-          >
+          <NavLink to="/contact" onClick={closeMenu} className={navLinkClass}>
             Contact
-          </a>
+          </NavLink>
           <a
             href={contactHref}
             onClick={closeMenu}

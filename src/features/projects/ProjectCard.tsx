@@ -33,7 +33,7 @@ export function ProjectCard({
 
       <div className="flex min-w-0 flex-col items-start pb-1 sm:py-0.5 sm:pr-1">
         <div className="flex w-full min-w-0 items-start gap-1">
-          <h3 className="portfolio-heading min-w-0 break-words text-xl">{title}</h3>
+          <h2 className="portfolio-heading min-w-0 break-words text-xl">{title}</h2>
           {githubUrl && (
             <a
               href={githubUrl}

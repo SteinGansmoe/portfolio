@@ -4,17 +4,21 @@ import { contactHref } from "@/lib/contact";
 
 export function Footer() {
   return (
-    <footer className="bg-portfolio-background font-portfolio-sans text-portfolio-muted border-t">
-      <div className="portfolio-container ">
+    <footer className="border-t bg-portfolio-background font-portfolio-sans text-portfolio-muted">
+      <div className="portfolio-container">
         <div className="flex flex-col gap-6 border-portfolio-border py-5 md:flex-row md:flex-wrap md:items-center md:justify-between">
           <Link
             to="/"
             className="portfolio-focus inline-flex items-center gap-5 self-start rounded text-portfolio-text"
             aria-label="Stein Gansmoe — Home"
           >
-            <span aria-hidden="true" className="text-2xl font-light tracking-[-0.06em]">
-              SG
-            </span>
+            <img
+              src="/navbarlogo.webp"
+              alt=""
+              width={36}
+              height={36}
+              className="h-9 w-9 shrink-0 object-cover"
+            />
             <span>
               <span className="block font-portfolio-serif text-base">{profile.name}</span>
               <span className="mt-1 block text-[10px] text-portfolio-muted">
@@ -44,12 +48,12 @@ export function Footer() {
             >
               About
             </Link>
-            <a
-              href={contactHref}
+            <Link
+              to="/contact"
               className="portfolio-focus rounded transition-colors hover:text-portfolio-text"
             >
               Contact
-            </a>
+            </Link>
           </nav>
           <div className="flex items-center gap-3">
             {[

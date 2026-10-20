@@ -3,6 +3,8 @@ import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
 import { BackToTop } from "./BackToTop";
 import { useLocation } from "react-router-dom";
+import { Hero } from "@/components/home/Hero";
+import { heroes } from "@/data/heroes";
 
 type Props = {
   children: ReactNode;
@@ -10,6 +12,7 @@ type Props = {
 
 export function AppLayout({ children }: Props) {
   const location = useLocation();
+  const hero = heroes[location.pathname.toLowerCase().replace(/\/+$/, "") || "/"];
 
   return (
     <div className="flex min-h-screen flex-col bg-slate-950 text-slate-100">
@@ -25,6 +28,7 @@ export function AppLayout({ children }: Props) {
           aria-hidden="true"
           className="pointer-events-none absolute h-px w-px"
         />
+        {hero && <Hero {...hero} />}
         {children}
       </main>
 
