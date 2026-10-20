@@ -23,7 +23,7 @@ export function Hero({
   return (
     <section
       aria-labelledby="hero-heading"
-      className="relative isolate overflow-hidden border-b border-white/[0.06] bg-[#0b1014] text-[#f5f5f3] -mt-16"
+      className="relative isolate overflow-hidden border-b border-white/[0.06] bg-[#0b1014] text-[#f5f5f3] -mt-[72px] md:-mt-16"
     >
       {/* Decorative photograph: the text supplies the section's meaning. */}
       <img
@@ -37,7 +37,7 @@ export function Hero({
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(90deg,#0b1014_0%,rgba(11,16,20,0.96)_35%,rgba(11,16,20,0.64)_60%,rgba(11,16,20,0.32)_100%)] max-md:bg-[linear-gradient(90deg,rgba(11,16,20,0.94),rgba(11,16,20,0.74))]" />
       <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-[#0b1014]/30 via-transparent to-[#0b1014]/65" />
 
-      <div className="relative mx-auto flex min-h-[480px] max-w-5xl items-start px-6 pb-20 pt-14 sm:px-8 md:min-h-[470px] md:pb-16 md:pt-10">
+      <div className="relative mx-auto flex min-h-[530px] max-w-5xl items-start px-6 pb-20 pt-14 sm:px-8 md:min-h-[470px] md:pb-16 md:pt-10">
         <div className="w-full max-w-[520px]">
           <p className="mt-12 pt-12 mb-4 text-[10px] font-medium uppercase tracking-[0.2em] text-[#b9bec3]">
             {label}

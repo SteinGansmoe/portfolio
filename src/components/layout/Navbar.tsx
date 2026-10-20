@@ -32,7 +32,7 @@ export function Navbar() {
         }
       }}
     >
-      <div className="mx-auto flex min-h-[72px] max-w-[1440px] flex-wrap items-center justify-between gap-x-4 px-6 sm:px-8 md:min-h-[64px]">
+      <div className="mx-auto flex min-h-[72px] max-w-[1440px] flex-wrap  items-center justify-between gap-x-4 px-6 sm:px-8 md:min-h-[64px]">
         <NavLink
           to="/"
           onClick={closeMenu}
@@ -71,7 +71,7 @@ export function Navbar() {
         <nav
           id="primary-navigation"
           aria-label="Main navigation"
-          className={`${menuOpen ? "flex" : "hidden"} w-full flex-col gap-3 border-t border-white/10 pb-6 pt-4 md:flex md:w-auto md:flex-row md:items-center md:gap-8 md:border-0 md:py-0`}
+          className={`${menuOpen ? "flex" : "hidden"} absolute md:static top-full left-0 w-full flex-col gap-3 border-t md:bg-transparent bg-[#0b1014] border-white/10 pb-6 pt-4 md:flex md:w-auto md:flex-row md:items-center md:gap-8 md:border-0 md:py-0`}
         >
           <NavLink to="/" end className={navLinkClass} onClick={closeMenu}>
             Home

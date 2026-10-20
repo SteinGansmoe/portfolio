@@ -38,13 +38,13 @@ export function ProjectCard({
             href={githubUrl}
             target="_blank"
             rel="noreferrer"
-            className="portfolio-focus inline-flex h-7 w-7 items-center justify-center rounded text-portfolio-muted transition-colors hover:text-portfolio-text"
+            className="portfolio-focus inline-flex h-7 w-7 items-center justify-center rounded text-portfolio transition-colors hover:text-portfolio-text"
             >
               <svg
               aria-hidden="true"
               viewBox="0 0 24 24"
               fill="none"
-              className="h-3.5 w-3.5"
+              className="h-4 w-4"
             >
               <path
                 d="M14 4h6v6m0-6L10 14m0-9H5v15h15v-5"
@@ -72,7 +72,7 @@ export function ProjectCard({
           target="_blank"
           rel="noreferrer"
           aria-label={`Open ${title} Github repository (opens in a new tab)`}
-          className="portfolio-focus inline-flex min-h-8 items-center gap-4 rounded text-xs text-portfolio-text transition-colors hover:text-white"
+          className="portfolio-focus inline-flex min-h-8 items-center gap-1 rounded text-xs text-portfolio-text transition-colors hover:text-white"
         >
           Github <ArrowRight />
         </Link> 
@@ -82,7 +82,7 @@ export function ProjectCard({
           target="_blank"
           rel="noreferrer"
           aria-label={`Open ${title} live site (opens in a new tab)`}
-          className="portfolio-focus inline-flex min-h-8 items-center gap-4 rounded text-xs text-portfolio-text transition-colors hover:text-white"
+          className="portfolio-focus inline-flex min-h-8 items-center gap-1 rounded text-xs text-portfolio-text transition-colors hover:text-white"
         >
           View project <ArrowRight />
         </Link> 
