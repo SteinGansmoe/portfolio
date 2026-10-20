@@ -71,7 +71,7 @@ export function Navbar() {
         <nav
           id="primary-navigation"
           aria-label="Main navigation"
-          className={`${menuOpen ? "flex" : "hidden"} absolute md:static top-full left-0 w-full flex-col gap-3 border-t md:bg-transparent bg-[#0b1014] border-white/10 pb-6 pt-4 md:flex md:w-auto md:flex-row md:items-center md:gap-8 md:border-0 md:py-0`}
+          className={`${menuOpen ? "flex" : "hidden"} absolute items-center text-center md:static top-full left-0 w-full flex-col gap-3 border-t md:bg-transparent bg-[#0b1014] border-white/10 pb-6 pt-4 md:flex md:w-auto md:flex-row md:items-center md:gap-8 md:border-0 md:py-0`}
         >
           <NavLink to="/" end className={navLinkClass} onClick={closeMenu}>
             Home
@@ -92,7 +92,7 @@ export function Navbar() {
           <a
             href={contactHref}
             onClick={closeMenu}
-            className={`inline-flex min-h-9 items-center justify-center gap-4 self-start rounded-lg border border-white/20 px-4 py-2 text-xs transition-colors hover:border-white/50 hover:bg-white/5 md:ml-4 ${focusClass}`}
+            className={`inline-flex min-h-9 items-center justify-center self-center gap-4 rounded-lg border border-white/20 px-4 py-2 text-xs transition-colors hover:border-white/50 hover:bg-white/5 md:ml-4 ${focusClass}`}
           >
             Let’s talk
             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="h-4 w-4">
