@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { ArrowRight } from "@/components/ui/ArrowRight";
 
 type Props = {
   images: string[];
@@ -12,11 +13,14 @@ export function ProjectImageGallery({ images, title }: Props) {
 
   if (cleaned.length === 0) {
     return (
-      <div className="aspect-[16/9] w-full rounded border border-slate-800/50 bg-slate-900/30" />
+      <p className="rounded-portfolio border border-portfolio-border bg-portfolio-surface p-6 text-sm text-portfolio-muted">
+        Project images unavailable.
+      </p>
     );
   }
 
-  const active = cleaned[Math.min(index, cleaned.length - 1)];
+  const activeIndex = Math.min(index, cleaned.length - 1);
+  const active = cleaned[activeIndex];
 
   function prev() {
     setIndex((i) => (i - 1 + cleaned.length) % cleaned.length);
@@ -27,64 +31,85 @@ export function ProjectImageGallery({ images, title }: Props) {
   }
 
   return (
-    <div className="space-y-3">
+    <div
+      role="region"
+      aria-label={`${title} project images`}
+      className="min-w-0 space-y-4"
+    >
       {/* Main image */}
-      <div className="relative overflow-hidden rounded border border-slate-800/50 bg-slate-900/30">
-        <div className="aspect-[16/9]">
+      <div className="overflow-hidden rounded-portfolio border border-portfolio-border bg-portfolio-surface p-2 sm:p-3">
+        <div className="aspect-[16/10] sm:aspect-video">
           <img
             src={active}
-            alt={`${title} image ${index + 1}`}
-            className="h-full w-full object-cover"
-            loading="lazy"
+            alt={`${title} project image ${activeIndex + 1} of ${cleaned.length}`}
+            className="h-full w-full rounded-sm object-contain"
           />
         </div>
-
-        {cleaned.length > 1 && (
-          <>
-            <button
-              type="button"
-              onClick={prev}
-              className="portfolio-focus absolute left-3 top-1/2 -translate-y-1/2 rounded border border-slate-800/50 bg-slate-950/80 px-3 py-2 text-sm text-slate-100 backdrop-blur hover:bg-slate-950/80"
-              aria-label="Previous image"
-            >
-              ←
-            </button>
-            <button
-              type="button"
-              onClick={next}
-              className="portfolio-focus absolute right-3 top-1/2 -translate-y-1/2 rounded border border-slate-800/50 bg-slate-950/80 px-3 py-2 text-sm text-slate-100 backdrop-blur hover:bg-slate-950/80"
-              aria-label="Next image"
-            >
-              →
-            </button>
-          </>
-        )}
       </div>
 
-      {/* Thumbnails */}
       {cleaned.length > 1 && (
-        <div className="flex gap-2 overflow-x-auto pb-1">
-          {cleaned.map((src, i) => {
-            const isActive = i === index;
-            return (
+        <>
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <p
+              aria-live="polite"
+              aria-atomic="true"
+              className="text-xs text-portfolio-muted"
+            >
+              Image {activeIndex + 1} of {cleaned.length}
+            </p>
+            <div className="flex gap-2">
               <button
                 type="button"
-                key={src}
-                onClick={() => setIndex(i)}
-                className={[
-                  "portfolio-focus shrink-0 overflow-hidden rounded border transition motion-reduce:transition-none",
-                  isActive
-                    ? "border-violet-400/70"
-                    : "border-slate-800/50 hover:border-slate-700",
-                ].join(" ")}
-                aria-label={`View image ${i + 1}`}
-                aria-pressed={isActive}
+                onClick={prev}
+                className="portfolio-button min-h-11 min-w-11 px-3 motion-reduce:transition-none"
+                aria-label="Previous image"
               >
-                <img src={src} alt="" className="h-16 w-28 object-cover" loading="lazy" />
+                <ArrowRight className="h-4 w-4 rotate-180" />
               </button>
-            );
-          })}
-        </div>
+              <button
+                type="button"
+                onClick={next}
+                className="portfolio-button min-h-11 min-w-11 px-3 motion-reduce:transition-none"
+                aria-label="Next image"
+              >
+                <ArrowRight />
+              </button>
+            </div>
+          </div>
+
+          {/* Thumbnails */}
+          <div
+            className="flex flex-wrap gap-3"
+            role="group"
+            aria-label="Choose project image"
+          >
+            {cleaned.map((src, i) => {
+              const isActive = i === activeIndex;
+              return (
+                <button
+                  type="button"
+                  key={src}
+                  onClick={() => setIndex(i)}
+                  className={[
+                    "portfolio-focus min-h-11 w-20 max-w-full rounded-md border bg-portfolio-surface p-1 transition-colors motion-reduce:transition-none sm:w-24",
+                    isActive
+                      ? "border-portfolio-text"
+                      : "border-portfolio-border hover:border-portfolio-muted",
+                  ].join(" ")}
+                  aria-label={`View image ${i + 1}`}
+                  aria-pressed={isActive}
+                >
+                  <img
+                    src={src}
+                    alt=""
+                    className="aspect-[16/10] w-full rounded-sm object-contain"
+                    loading="lazy"
+                  />
+                </button>
+              );
+            })}
+          </div>
+        </>
       )}
     </div>
   );
