@@ -3,7 +3,11 @@ import { Link, useParams } from "react-router-dom";
 import type { Project } from "../features/projects/types";
 import { fetchProjectBySlug } from "../features/projects/api";
 import { ProjectImageGallery } from "@/features/projects/ProjectImageGallery";
-import ReactMarkdown from "react-markdown";
+import { ProjectCaseStudy } from "@/features/projects/ProjectCaseStudy";
+import { LaneStompArchitecture } from "@/features/projects/LaneStompArchitecture";
+import { ProjectDesignComparison } from "@/features/projects/ProjectDesignComparison";
+import { Container } from "@/components/layout/Container";
+import { ArrowRight } from "@/components/ui/ArrowRight";
 
 type Status = "idle" | "loading" | "success" | "error" | "not_found";
 
@@ -100,67 +104,84 @@ export function ProjectDetailPage() {
         : [];
 
   return (
-    <article className="space-y-6">
-      <div className="space-y-2">
-        <Link className="text-sm text-slate-300 hover:text-violet-400" to="/projects">
-          ← Go back
+    <Container className="px-4 py-8 font-portfolio-sans text-portfolio-text sm:px-6 sm:py-10 lg:px-8 lg:py-12">
+      <article className="space-y-12 lg:space-y-16">
+        <Link
+          className="portfolio-focus inline-flex min-h-11 items-center gap-3 rounded text-xs text-portfolio-muted transition-colors hover:text-portfolio-text motion-reduce:transition-none"
+          to="/projects"
+        >
+          <ArrowRight className="h-3.5 w-3.5 rotate-180" /> Back to projects
         </Link>
 
-        <section className="grid gap-8 lg:grid-cols-2 lg:items-start">
-          {/* Left: gallery */}
-          <ProjectImageGallery title={project.title} images={images} />
-
-          {/* Right: info */}
-          <div className="space-y-4">
-            <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+        <section
+          aria-labelledby="project-title"
+          className="grid min-w-0 items-start gap-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.35fr)] lg:gap-12"
+        >
+          <header className="min-w-0 space-y-6 lg:py-2">
+            <p className="portfolio-eyebrow">Project</p>
+            <h1
+              id="project-title"
+              className="portfolio-heading break-words text-4xl sm:text-5xl"
+            >
               {project.title}
             </h1>
 
-            <div className="flex flex-wrap gap-2">
+            <p className="max-w-xl break-words text-sm leading-7 text-portfolio-muted sm:text-base sm:leading-8">
+              {project.excerpt}
+            </p>
+
+            <ul
+              aria-label={`${project.title} technologies`}
+              className="flex min-w-0 flex-wrap gap-2"
+            >
               {project.tags.map((t) => (
-                <span
+                <li
                   key={t}
-                  className="rounded border border-slate-800 bg-slate-950/30 px-2.5 py-1 text-xs text-slate-300"
+                  className="max-w-full break-words rounded-full border border-portfolio-border bg-portfolio-background/40 px-3 py-1.5 text-[11px] leading-snug text-portfolio-text"
                 >
                   {t}
-                </span>
+                </li>
               ))}
-            </div>
-
-            <p className="text-slate-300">{project.excerpt}</p>
+            </ul>
 
             <div className="flex flex-wrap gap-3">
               <a
-                className="btn-secondary"
+                className="portfolio-button min-h-11 motion-reduce:transition-none"
                 href={project.githubUrl}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
+                aria-label={`Open ${project.title} GitHub repository (opens in a new tab)`}
               >
-                GitHub
+                GitHub <ArrowRight className="h-3.5 w-3.5" />
               </a>
               {project.demoUrl ? (
                 <a
-                  className="btn-primary"
+                  className="portfolio-button min-h-11 motion-reduce:transition-none"
                   href={project.demoUrl}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
+                  aria-label={`Open ${project.title} live demo (opens in a new tab)`}
                 >
-                  Live demo
+                  Live demo <ArrowRight className="h-3.5 w-3.5" />
                 </a>
               ) : (
-                <span className="text-sm text-slate-500">Live demo unavailable</span>
+                <span className="self-center text-sm text-portfolio-muted">
+                  Live demo unavailable
+                </span>
               )}
             </div>
-          </div>
-        </section>
-      </div>
+          </header>
 
-      <section className="rounded border border-slate-800/70 bg-slate-900/30 p-5">
-        <h2 className="mb-5 text-3xl font-semibold text-white">Case study</h2>
-        <div className="prose prose-invert max-w-none prose-headings:text-white prose-p:text-slate-300">
-          <ReactMarkdown>{project.content}</ReactMarkdown>
-        </div>
-      </section>
-    </article>
+          <ProjectImageGallery key={project.id} title={project.title} images={images} />
+        </section>
+
+        <ProjectCaseStudy content={project.content}>
+          {project.designComparison && (
+            <ProjectDesignComparison {...project.designComparison} />
+          )}
+        </ProjectCaseStudy>
+        {project.slug === "lanestomp" && <LaneStompArchitecture />}
+      </article>
+    </Container>
   );
 }

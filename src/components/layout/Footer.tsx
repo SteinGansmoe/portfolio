@@ -4,7 +4,7 @@ import { contactHref } from "@/lib/contact";
 
 export function Footer() {
   return (
-    <footer className="border-t bg-portfolio-background font-portfolio-sans text-portfolio-muted">
+    <footer className="border-t border-portfolio-border bg-portfolio-background font-portfolio-sans text-portfolio-muted">
       <div className="portfolio-container">
         <div className="flex flex-col gap-6 border-portfolio-border py-5 md:flex-row md:flex-wrap md:items-center md:justify-between">
           <Link
